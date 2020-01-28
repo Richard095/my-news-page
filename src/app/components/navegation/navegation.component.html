@@ -1,0 +1,15 @@
+<div class="topnav toolbar" id="myTopnav">
+    <div class="container ">
+        <a [routerLink]="['/']">Home</a>
+        <a [routerLink]="['/']">Trends</a>
+        <a class="menu-section" [matMenuTriggerFor]="menu">Categorias</a>
+        <mat-menu #menu="matMenu" class="section">
+            <button class="menu-item" mat-menu-item>Inovations</button>
+            <button class="menu-item" mat-menu-item>Android news</button>
+            <button class="menu-item" mat-menu-item>Tech</button>
+            <button class="menu-item" mat-menu-item>Aplications</button>
+        </mat-menu>
+        <a [routerLink]="['/sections']">Contact</a>
+    </div>
+    <a href="javascript:void(0);" class="icon" (click)="myFunction()">&#9776;</a>
+</div>

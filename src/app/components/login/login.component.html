@@ -1,0 +1,51 @@
+<div class="container d-flex ">
+    <div class="row align-items-center w-100 h-100">
+        <div class="col-lg-8">
+            <h1 class="title">Acceso al panel de administración</h1>
+            <p class="subtitle">
+                Este modulo es solo es para usuarios autorizados. Para mas informacion
+                lea las <span>Politicas de privacidad.</span>
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <mat-card class="example-card">
+                <mat-progress-bar [style.visibility]="isLoading ? 'visible' : 'hidden'" class="mt-2 mb-2"
+                    mode="indeterminate"></mat-progress-bar>
+                <mat-card-header class="d-flex justify-content-center">
+                    <mat-card-title>Iniciar sesión</mat-card-title>
+                </mat-card-header>
+                <hr>
+                <div class="row d-flex justify-content-center">
+
+                    <mat-card-content class="card-content">
+                        <div class="example-container">
+                            <mat-form-field>
+                                <input [(ngModel)]="user.username" matInput placeholder="Username">
+
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <input [(ngModel)]="user.password" matInput placeholder="Password"
+                                    [type]="hide ? 'password' : 'text'">
+                                <button mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                    </mat-card-content>
+
+
+
+                </div>
+
+                <mat-card-actions>
+                    <button (click)="login()" mat-button color="primary" class="btn-block login-btn">Login</button>
+                </mat-card-actions>
+
+
+
+            </mat-card>
+        </div>
+    </div>
+</div>
