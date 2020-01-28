@@ -1,6 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
+import { PostService } from 'src/app/services/post.service';
+
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,9 +12,14 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
-  constructor(private tokenService: TokenService, private router: Router) { }
+  user: User;
+  constructor(private tokenService: TokenService, private router: Router, private userService: PostService) {
+    this.user = { name: '', email: '' }
+    this.router.navigate(['/admin/start'])
+  }
 
   ngOnInit() {
+    this.getProfile();
   }
 
   toggleSideBar() {
@@ -26,5 +34,13 @@ export class DashboardComponent implements OnInit {
   logOut() {
     this.tokenService.removeToken();
     this.router.navigate(['/home'])
+  }
+
+  getProfile() {
+    this.userService.getProfile().subscribe((res: User) => {
+      this.user = res;
+    }, (error) => {
+      console.log(error);
+    });
   }
 }

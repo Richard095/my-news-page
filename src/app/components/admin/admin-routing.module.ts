@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 import { CreatepostComponent } from './createpost/createpost.component';
+import { StartComponent } from './start/start.component';
+import { AdminStartRedirectGuard } from 'src/app/shared/guards/admin-start-redirect.guard';
 
 const routes: Routes = [
   {
@@ -12,6 +14,9 @@ const routes: Routes = [
     children: [
       {
         path: 'createpost', component: CreatepostComponent
+      },
+      {
+        path: 'start', component: StartComponent
       }
     ]
 
