@@ -4,7 +4,7 @@ export interface Post {
   subtitle?: string;
   content?: string;
   createdAt?: string;
-  images?: Images[]
+  images?: Images[];
 }
 export interface Images {
   url?: string;

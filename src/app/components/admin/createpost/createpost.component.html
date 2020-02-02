@@ -1,1 +1,70 @@
-<h1>CREATING-POST</h1>
+<div class="container-fluid mt-3">
+
+    <div class="row content ">
+        <div class="col">
+            <mat-progress-bar [style.visibility]="processing ? 'visible' : 'hidden'" class="" mode="indeterminate">
+            </mat-progress-bar>
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Nueva noticia</mat-card-title>
+                    <mat-card-subtitle>{{date}}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <mat-form-field class="btn-block">
+                                <input [(ngModel)]="post.title" matInput placeholder="Titulo">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-6">
+                            <mat-form-field class="btn-block">
+                                <input [(ngModel)]="post.subtitle" matInput placeholder="Subtitulo de la noticia">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 text-redaction">
+                            <mat-form-field style="height: 80%" class="btn-block">
+                                <textarea [(ngModel)]="post.content"
+                                    style="background: #ffffff; height: 300px; max-height: 300px;" matInput
+                                    placeholder="Redacta aqui tu noticia"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-8 col-md-12 col-12">
+                            <div id="content-images" class="row">
+                                <!-- Her goes the images -->
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-12 col-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <input name="image" style="display: none" accept="image/*" type="file"
+                                        multiple="multiple" (change)="onFileSelect($event)" #fileInput>
+                                    <button (click)="fileInput.click()" mat-flat-button
+                                        class="btn-block button-actions">
+                                        Añadir imagens
+                                        <mat-icon>image</mat-icon>
+                                    </button>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <button mat-flat-button class="btn-block button-actions" (click)="addPost()">
+                                        <mat-icon>send</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>
+</div>

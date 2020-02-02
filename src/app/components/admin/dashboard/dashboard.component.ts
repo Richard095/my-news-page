@@ -13,9 +13,11 @@ import { User } from 'src/app/models/User';
 export class DashboardComponent implements OnInit {
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
   user: User;
+  hasHistory: boolean = false;
   constructor(private tokenService: TokenService, private router: Router, private userService: PostService) {
     this.user = { name: '', email: '' }
     this.router.navigate(['/admin/start'])
+    this.hasHistory = this.router.navigated;
   }
 
   ngOnInit() {

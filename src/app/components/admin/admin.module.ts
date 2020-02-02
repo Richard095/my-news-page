@@ -6,7 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreatepostComponent } from './createpost/createpost.component';
 import { MaterialModule } from 'src/app/material.module';
 import { StartComponent } from './start/start.component';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -15,7 +15,8 @@ import { StartComponent } from './start/start.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ]
 })
 export class AdminModule { }

@@ -1,0 +1,28 @@
+.example-header-image {
+  background-image: url("https://image.flaticon.com/icons/svg/1828/1828817.svg");
+  background-size: cover;
+}
+.content {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  margin-bottom: 10px;
+}
+.example-card {
+  height: auto;
+}
+.textarea {
+  height: 80%;
+}
+.img-note:hover {
+  opacity: 0.5;
+}
+
+.img-note {
+  border-radius: 5px 5px 5px 5px;
+}
+
+.button-actions:focus {
+  outline: none;
+  border: none;
+}

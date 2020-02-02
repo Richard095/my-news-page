@@ -12,6 +12,7 @@ import { AdminModule } from './components/admin/admin.module';
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptorService } from './interceptors/token-interceptor.service';
+import { ModalComponent } from './components/modals/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TokenInterceptorService } from './interceptors/token-interceptor.servic
     LoginComponent,
     HomeComponent,
     NavegationComponent,
-    ErrorpageComponent
+    ErrorpageComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,9 @@ import { TokenInterceptorService } from './interceptors/token-interceptor.servic
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ModalComponent
+  ]
 })
 export class AppModule { }
