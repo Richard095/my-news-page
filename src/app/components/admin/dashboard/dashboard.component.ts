@@ -16,8 +16,9 @@ export class DashboardComponent implements OnInit {
   hasHistory: boolean = false;
   constructor(private tokenService: TokenService, private router: Router, private userService: PostService) {
     this.user = { name: '', email: '' }
-    this.router.navigate(['/admin/start'])
+    this.router.navigate(['/admin/start'], { replaceUrl: true })
     this.hasHistory = this.router.navigated;
+
   }
 
   ngOnInit() {

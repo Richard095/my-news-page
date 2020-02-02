@@ -1,7 +1,13 @@
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
+  background-color: #000000;
   overflow: hidden;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1500;
 }
 .menu-item:focus {
   border: none;
@@ -120,4 +126,10 @@
     width: 100%;
     text-align: left;
   }
+}
+.admin-redirect:hover {
+  cursor: pointer;
+}
+.example-spacer {
+  flex: 1 1 auto;
 }

@@ -93,9 +93,9 @@ export class CreatepostComponent implements OnInit {
     }
   }
 
-  removeDuplicateImages(imageArray, comp) {
+  removeDuplicateImages(imageArray, objectProperty) {
     const unique = imageArray
-      .map(e => e[comp])
+      .map(e => e[objectProperty])
       // store the keys of the unique objects
       .map((e, i, final) => final.indexOf(e) === i && i)
       // eliminate the dead keys & store unique objects

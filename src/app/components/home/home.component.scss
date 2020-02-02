@@ -22,3 +22,10 @@
   outline: none;
   border: none;
 }
+
+.banner {
+  background-image: url("/assets/1.jpg");
+  background-size: cover;
+  height: 150px;
+  background-position: 70% 20%;
+}
