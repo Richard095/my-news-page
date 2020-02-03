@@ -29,6 +29,7 @@ export class StartComponent implements OnInit {
     this.postService.getProfile().subscribe((res: User) => {
       this.posts = res.posts;
       this.dataSource = this.posts;
+      this.posts.reverse();
     }, (error) => {
       console.log(error);
     })

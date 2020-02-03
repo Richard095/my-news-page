@@ -3,7 +3,7 @@
         <mat-toolbar-row>
             <a mat-button class [routerLink]="['/']">Home</a>
             <a mat-button class [routerLink]="['/']">Trends</a>
-            <a mat-button class class="menu-section" [matMenuTriggerFor]="menu">Categorias</a>
+            <a mat-button class class="menu-section" [matMenuTriggerFor]="menu">Sections</a>
             <mat-menu #menu="matMenu" class="section">
                 <button class="menu-item" mat-menu-item>Inovations</button>
                 <button class="menu-item" mat-menu-item>Android news</button>
@@ -12,7 +12,7 @@
             </mat-menu>
             <a mat-button class [routerLink]="['/']">Contact</a>
             <a mat-button class="admin-redirect" [style.visibility]="userIsLogin ? 'visible' : 'hidden'"
-                (click)="admin()">Panel de administración</a>
+                (click)="admin()">Dashboard </a>
         </mat-toolbar-row>
     </div>
 </div>

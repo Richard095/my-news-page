@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from "rxjs/operators"
 @Component({
   selector: 'app-createpost',
   templateUrl: './createpost.component.html',
@@ -16,11 +17,24 @@ export class CreatepostComponent implements OnInit {
   post: Post;
   formData: any = new FormData();
   imageContainer: any;
-  constructor(private postService: PostService) {
+  isEdit: boolean = false;
+  constructor(private postService: PostService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.post = { title: '', subtitle: '', content: '' }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    const params = this.activatedRoute.snapshot.params;
+    if (params.id) {
+      this.postService.getPostById(params.id)
+        .subscribe((res: Post) => {
+          this.post = res;
+          this.isEdit = true;
+        }, (error) => {
+
+        })
+    }
+
+  }
 
   onFileSelect(evt) {
     this.files = evt.target.files;
@@ -63,6 +77,7 @@ export class CreatepostComponent implements OnInit {
     this.formData.append("title", this.post.title);
     this.formData.append("subtitle", this.post.subtitle);
     this.formData.append("content", this.post.content);
+
     for (let i = 0; i < this.imagesFiles.length; i++) {
       this.formData.append("image", this.imagesFiles[i]);
     }
@@ -101,6 +116,21 @@ export class CreatepostComponent implements OnInit {
       // eliminate the dead keys & store unique objects
       .filter(e => imageArray[e]).map(e => imageArray[e]);
     return unique;
+  }
+
+  updatePost() {
+    delete this.post.createdAt;
+    delete this.post.images;
+    this.processing = true;
+    this.postService.updatePost(this.post._id, this.post).subscribe((res: Post) => {
+      this.processing = false;
+      this.router.navigate(['admin/start'], { replaceUrl: true });
+    }, (error) => {
+      this.processing = false;
+      console.log(error)
+    }
+    )
+
   }
 
 }

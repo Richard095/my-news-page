@@ -54,7 +54,8 @@
                                     </button>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-6">
-                                    <button mat-flat-button class="btn-block button-actions" (click)="addPost()">
+                                    <button mat-flat-button color="primary" class="btn-block button-actions"
+                                        (click)="isEdit ? updatePost() : addPost()">
                                         <mat-icon>send</mat-icon>
                                     </button>
                                 </div>

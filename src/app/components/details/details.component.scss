@@ -1,0 +1,24 @@
+.banner {
+  background-image: url("/assets/1.jpg");
+  background-size: cover;
+  height: 150px;
+  background-position: 70% 20%;
+}
+.page {
+  background: white;
+  height: auto;
+}
+.image {
+  background-size: cover;
+  width: 80%;
+  background-position: 70% 20%;
+  margin: 10px;
+  border-radius: 5px 5px 5px 5px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-icon:focus {
+  border: none;
+  outline: none;
+}

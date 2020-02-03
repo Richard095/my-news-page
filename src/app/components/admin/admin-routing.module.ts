@@ -17,6 +17,9 @@ const routes: Routes = [
       },
       {
         path: 'start', component: StartComponent
+      },
+      {
+        path: 'createpost/edit/:id', component: CreatepostComponent
       }
     ]
 

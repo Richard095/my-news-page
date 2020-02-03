@@ -13,6 +13,7 @@ import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptorService } from './interceptors/token-interceptor.service';
 import { ModalComponent } from './components/modals/modal/modal.component';
+import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ModalComponent } from './components/modals/modal/modal.component';
     HomeComponent,
     NavegationComponent,
     ErrorpageComponent,
-    ModalComponent
+    ModalComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

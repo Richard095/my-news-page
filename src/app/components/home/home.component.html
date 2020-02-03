@@ -29,7 +29,9 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <img src="{{ post.images[0].url }}" class="img-fluid">
-                        <button mat-button class="mt-2 btn-block button-open-detail">Leer mas</button>
+                        <button [routerLink]="['/detail/',post._id]" mat-button
+                            class="mt-2 btn-block button-open-detail">Leer
+                            mas</button>
                     </div>
                 </div>
             </div>

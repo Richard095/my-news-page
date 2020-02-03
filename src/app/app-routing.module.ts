@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavegationComponent } from './components/navegation/navegation.component';
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { AuthLoginIgnoreGuard } from './shared/guards/auth-login-ignore.guard';
+import { DetailsComponent } from './components/details/details.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,9 @@ const routes: Routes = [
   },
   {
     path: 'login', component: LoginComponent, canActivate: [AuthLoginIgnoreGuard]
+  },
+  {
+    path: 'detail/:id', component: DetailsComponent
   },
   {
     path: '**', component: ErrorpageComponent

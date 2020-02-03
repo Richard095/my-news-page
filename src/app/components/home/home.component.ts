@@ -18,8 +18,14 @@ export class HomeComponent implements OnInit {
   getPosts() {
     this.postService.getPosts().subscribe((res: any) => {
       this.posts = res.posts;
+      this.posts.reverse();
     }, (error) => {
       console.log(error);
     })
+  }
+
+  detail(evt) {
+    console.log(evt);
+
   }
 }

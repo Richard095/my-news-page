@@ -1,0 +1,36 @@
+<app-navegation></app-navegation>
+<div class="container page mb-3">
+    <div class="row d-flex justify-content-center m-3">
+        <div class="col-10  mt-3 ">
+            <h2>{{post.title}}</h2>
+        </div>
+        <hr width="100%">
+    </div>
+    <div class="row  ml-3 mr-3 mt-2 d-flex justify-content-center pb-3">
+        <div class="col-lg-10 ">
+            <div class="row ">
+                <div class="col-lg-10 d-flex justify-content-start">
+                    <p class="pr-3">Publicado el {{ post.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
+                </div>
+                <div class="col-lg-2 d-flex justify-content-end">
+                    <button mat-button class="example-icon pr-3">
+                        150
+                        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">favorite
+                        </mat-icon>
+
+                    </button>
+
+                </div>
+            </div>
+            <hr width="100%">
+        </div>
+        <div class="col-lg-10">
+            <p>
+                {{ post.content }}
+            </p>
+        </div>
+        <div class="col-lg-10 d-flex justify-content-center">
+            <img class="image" src="{{ post.images[0].url }}" alt="img">
+        </div>
+    </div>
+</div>
