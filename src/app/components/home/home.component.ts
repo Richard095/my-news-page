@@ -19,13 +19,9 @@ export class HomeComponent implements OnInit {
     this.postService.getPosts().subscribe((res: any) => {
       this.posts = res.posts;
       this.posts.reverse();
+      console.log(this.posts);
     }, (error) => {
       console.log(error);
     })
-  }
-
-  detail(evt) {
-    console.log(evt);
-
   }
 }

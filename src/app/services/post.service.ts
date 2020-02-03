@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Post } from "../models/Post";
+import { Post, IGiveReaction } from "../models/Post";
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
 import { map } from 'rxjs/operators';
@@ -47,6 +47,11 @@ export class PostService {
     const uri = this.URI_API + "/post/" + id;
     console.log(uri);
     return this.httpClient.put(uri, post);
+  }
+
+  public giveReaction(reaction: IGiveReaction) {
+    const uri = 'http://localhost:4000/post/reaction/';
+    return this.httpClient.post(uri, reaction);
   }
 
   //It will be changed to user service.

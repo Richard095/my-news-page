@@ -13,11 +13,11 @@
                     <p class="pr-3">Publicado el {{ post.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
                 </div>
                 <div class="col-lg-2 d-flex justify-content-end">
-                    <button mat-button class="example-icon pr-3">
-                        150
-                        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">favorite
+                    <button mat-button (click)="giveReaction()" class="example-icon pr-3">
+                        {{ reactions }}
+                        <mat-icon class="example-icon" [ngClass]="{'liked': exist, 'no-liked': !exist}"
+                            id="icon-reaction-id" aria-hidden="false" aria-label="Example delete icon">favorite
                         </mat-icon>
-
                     </button>
 
                 </div>
@@ -25,7 +25,7 @@
             <hr width="100%">
         </div>
         <div class="col-lg-10">
-            <p>
+            <p ng-bind-html="post.content | unsafe">
                 {{ post.content }}
             </p>
         </div>
