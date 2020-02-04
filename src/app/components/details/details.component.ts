@@ -1,27 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 import { Post, IGiveReaction } from 'src/app/models/Post';
 import { ReactextService } from 'src/app/services/reactext.service';
-const uuidv4 = require('uuid/v4');
+import uuidv4 from 'uuid/v4';
+import { Socket } from 'ngx-socket-io';
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
   post: Post
   reaction: IGiveReaction;
   reactions: string | number;
   exist: boolean;
-  constructor(private postService: PostService, private activatedRoute: ActivatedRoute, private reactionStorage: ReactextService) {
+  constructor(private socketIO: Socket, private postService: PostService, private activatedRoute: ActivatedRoute, private reactionStorage: ReactextService) {
     this.post = { title: '', content: '', createdAt: '', images: [{ id: '', url: '' }], reactions: [{ _id: '', postedBy: '' }] }
     this.reaction = { postId: '', reactionId: '' }
   }
 
   ngOnInit() {
+    this.socketIO.connect();
     this.verifiInvitedId();
     this.getPostById();
+    this.socketIO.on("newreactions", (event) => {
+      this.getPostById();
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.socketIO.disconnect();
   }
 
   verifiInvitedId() {
@@ -45,6 +55,7 @@ export class DetailsComponent implements OnInit {
   giveReaction() {
     this.reaction.postId = this.post._id;
     this.postService.giveReaction(this.reaction).subscribe(res => {
+      this.socketIO.emit("newreactions", "reaction")
       this.getPostById();
     }, error => { console.log(error) })
   }

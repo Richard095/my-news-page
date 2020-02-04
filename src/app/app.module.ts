@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptorService } from './interceptors/token-interceptor.service';
 import { ModalComponent } from './components/modals/modal/modal.component';
 import { DetailsComponent } from './components/details/details.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:4000/', options: {} };
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { DetailsComponent } from './components/details/details.component';
     MaterialModule,
     AdminModule,
     AppRoutingModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     {
