@@ -6,6 +6,7 @@ export interface Post {
   createdAt?: string;
   images?: Images[];
   reactions?: Reactions[];
+  comments?: Comment[];
 }
 export interface Images {
   url?: string;
@@ -20,4 +21,13 @@ export interface Reactions {
 export interface IGiveReaction {
   postId?: string;
   reactionId?: string;
+}
+
+export interface Comment {
+  _id?: string;
+  commentedBy?: string;
+  postId?: string;
+  comment?: string;
+  commentId?: string;
+  createdAt?: string;
 }

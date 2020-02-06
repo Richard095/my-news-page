@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Post, IGiveReaction } from "../models/Post";
+import { Post, IGiveReaction, Comment } from "../models/Post";
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
 import { map } from 'rxjs/operators';
@@ -52,6 +52,16 @@ export class PostService {
   public giveReaction(reaction: IGiveReaction) {
     const uri = 'http://localhost:4000/post/reaction/';
     return this.httpClient.post(uri, reaction);
+  }
+
+  public commentPost(comment: Comment): Observable<Comment> {
+    const uri = "http://localhost:4000/post/comment";
+    return this.httpClient.post(uri, comment);
+  }
+
+  public removeComment(comment: Comment) {
+    const uri = "http://localhost:4000/post/removecomment";
+    return this.httpClient.post(uri, comment);
   }
 
   //It will be changed to user service.

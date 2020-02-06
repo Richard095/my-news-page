@@ -1,11 +1,13 @@
 <app-navegation></app-navegation>
-<div class="container page mb-3">
+<div class="container page mb-3 ">
+
     <div class="row d-flex justify-content-center m-3">
         <div class="col-10  mt-3 ">
             <h2>{{post.title}}</h2>
         </div>
         <hr width="100%">
     </div>
+
     <div class="row  ml-3 mr-3 mt-2 d-flex justify-content-center pb-3">
         <div class="col-lg-10 ">
             <div class="row ">
@@ -25,12 +27,71 @@
             <hr width="100%">
         </div>
         <div class="col-lg-10">
-            <p ng-bind-html="post.content | unsafe">
+            <p class="angular-with-newlines">
                 {{ post.content }}
             </p>
         </div>
         <div class="col-lg-10 d-flex justify-content-center">
             <img class="image" src="{{ post.images[0].url }}" alt="img">
         </div>
+        <hr width="100%">
+
+        <!-- // -->
+
+
     </div>
+
+    <div class="row  d-flex justify-content-center">
+
+        <div class="row d-flex justify-content-center  comments ml-3 mr-3 mt-2  pb-3">
+            <div class="col-lg-10">
+                <h5>Commentarios</h5>
+                <div class="box-comment">
+                    <div class="form-group box-comment-container">
+                        <div class="row p-0 m-0">
+                            <div class="col-lg-10">
+                                <input [(ngModel)]="comment.comment" type="text" class="box-comment"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp"
+                                    placeholder="Escribe un comentario...">
+                            </div>
+                            <div class="col-lg-2">
+                                <Button (click)="commentPost()" [ngClass]="{'send': comment.comment}"
+                                    [disabled]="comment.comment === ''" class="send-button">Comentar</Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10 mt-2" *ngFor="let comment of comments">
+                <mat-card class="content-comments p-2 m-0">
+
+                    <div class="row">
+
+                        <div class="col-lg-1">
+                            <mat-card-header>
+                                <div mat-card-avatar class="example-header-image"></div>
+                            </mat-card-header>
+                        </div>
+                        <div class="col-lg-11">
+                            <mat-card-content>
+                                <p class="text-comment">
+                                    {{comment.comment}}
+                                </p>
+                            </mat-card-content>
+                            <div class="row  d-flex justify-content-end">
+                                <Button [style.visibility]="comment.commentedBy === myUID ? 'visible' : 'hidden'"
+                                    class="remove-button pr-3" (click)="deleteComment(comment._id)">Eliminar
+                                    commentario</Button>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+
+
+
 </div>
