@@ -3,6 +3,11 @@ import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from "rxjs/operators"
+interface Category {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-createpost',
   templateUrl: './createpost.component.html',
@@ -18,8 +23,20 @@ export class CreatepostComponent implements OnInit {
   formData: any = new FormData();
   imageContainer: any;
   isEdit: boolean = false;
+  categorys: Category[];
+  categorySelected: string;
   constructor(private postService: PostService, private activatedRoute: ActivatedRoute, private router: Router) {
-    this.post = { title: '', subtitle: '', content: '' }
+    this.post = { title: '', category: '', subtitle: '', content: '' }
+    this.categorys = [
+      { value: 'Tech', viewValue: 'Tech' },
+      { value: 'Innovations', viewValue: 'Innovations' },
+      { value: 'Applications', viewValue: 'Applications' },
+      { value: 'Android', viewValue: 'Android' },
+      { value: 'Apple', viewValue: 'Apple' },
+      { value: 'AI', viewValue: 'AI' }
+    ]
+    this.categorySelected = this.categorys[0].value;
+    this.router.navigate(['admin/createpost']);
   }
 
   ngOnInit() {
@@ -74,26 +91,29 @@ export class CreatepostComponent implements OnInit {
   }
 
   addPost() {
+    this.post.category = this.categorySelected;
     this.formData.append("title", this.post.title);
     this.formData.append("subtitle", this.post.subtitle);
     this.formData.append("content", this.post.content);
-
+    this.formData.append("category", this.post.category);
     for (let i = 0; i < this.imagesFiles.length; i++) {
       this.formData.append("image", this.imagesFiles[i]);
     }
     this.processing = true;
     this.postService.addPost(this.formData).subscribe((res: Post) => {
       this.processing = false;
+      this.post = { title: '', subtitle: '', content: '', category: '' }
+      this.formData.delete('title');
+      this.formData.delete('subtitle');
+      this.formData.delete('content');
+      this.formData.delete('category');
+      this.formData.delete('image');
+      this.imagesFiles = [];
       while (this.imageContainer.hasChildNodes()) {
         this.imageContainer.removeChild(this.imageContainer.lastChild);
       }
-      this.imagesFiles = [];
-      this.post = { title: '', subtitle: '', content: '' }
 
-    }, (error) => {
-      this.processing = false;
-      console.log(error);
-    });
+    }, (error) => { this.processing = false; console.log(error); });
 
   }
 

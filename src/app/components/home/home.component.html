@@ -16,27 +16,38 @@
         <hr width="100%">
     </div>
 
-    <div class="row post-content p-3 ">
-        <div class="col-lg-8 col-12 mt-2" *ngFor="let post of posts">
-            <div class="content-post p-3">
-                <h5>{{ post.title }}</h5>
-                <p>Publicado el {{ post.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
-                <div class="row">
-                    <div class="col-lg-8 col-12 mt-2">
-                        <div class="text">
-                            <p>{{post.subtitle}}</p>
+    <div class="row  post-content p-3">
+
+        <div class="col-8 mt-2">
+            <div class="posts" *ngFor="let post of posts">
+                <div class="content-post p-3">
+                    <h5>{{ post.title }}</h5>
+                    <p>Publicado el {{ post.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
+                    <div class="row">
+                        <div class="col-lg-8 col-12 mt-2">
+                            <div class="text">
+                                <p>{{post.subtitle}}</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4">
+
+                            <img *ngIf="post.images.length > 0" src="{{ post.images[0].url }}" class="img-fluid">
+
+                            <button [routerLink]="['/detail/',post._id]" mat-button
+                                class="mt-2 btn-block button-open-detail">Leer
+                                mas</button>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
-                        <img src="{{ post.images[0].url }}" class="img-fluid">
-                        <button [routerLink]="['/detail/',post._id]" mat-button
-                            class="mt-2 btn-block button-open-detail">Leer
-                            mas</button>
-                    </div>
                 </div>
+                <hr width="100%">
             </div>
+
         </div>
-        <div class="col-12 col-md-4 mt-2">
+
+        <div class="col-4 lign-self-end bg-primary  mt-2">
+            <div class="content-suggest-articles">
+                <h5>Articulos mas leidos</h5>
+            </div>
         </div>
     </div>
 

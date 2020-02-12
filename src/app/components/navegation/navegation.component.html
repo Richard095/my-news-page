@@ -1,14 +1,15 @@
 <div class="topnav toolbar" id="myTopnav">
     <div class="container ">
         <mat-toolbar-row>
-            <a mat-button class [routerLink]="['/']">Home</a>
-            <a mat-button class [routerLink]="['/']">Trends</a>
+            <a mat-button class [routerLink]="['/home/','Tech']">Home</a>
+            <!-- <a mat-button class [routerLink]="['/']">Trends</a> -->
             <a mat-button class class="menu-section" [matMenuTriggerFor]="menu">Sections</a>
             <mat-menu #menu="matMenu" class="section">
-                <button class="menu-item" mat-menu-item>Inovations</button>
-                <button class="menu-item" mat-menu-item>Android news</button>
-                <button class="menu-item" mat-menu-item>Tech</button>
-                <button class="menu-item" mat-menu-item>Aplications</button>
+                <button [routerLink]="['/home/','Innovations']" class="menu-item" mat-menu-item>Innovations</button>
+                <button class="menu-item" [routerLink]="['/home/','Applications']" mat-menu-item>Applications</button>
+                <button class="menu-item" [routerLink]="['/home/','Android']" mat-menu-item>Android</button>
+                <button class="menu-item" [routerLink]="['/home/','Apple']" mat-menu-item>Apple</button>
+                <button class="menu-item" [routerLink]="['/home/','AI']" mat-menu-item>AI</button>
             </mat-menu>
             <a mat-button class [routerLink]="['/']">Contact</a>
             <a mat-button class="admin-redirect" [style.visibility]="userIsLogin ? 'visible' : 'hidden'"

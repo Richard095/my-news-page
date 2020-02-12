@@ -2,6 +2,7 @@ export interface Post {
   _id?: string;
   title?: string;
   subtitle?: string;
+  category?: string;
   content?: string;
   createdAt?: string;
   images?: Images[];

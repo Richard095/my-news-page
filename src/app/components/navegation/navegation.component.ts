@@ -12,7 +12,6 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class NavegationComponent implements OnInit {
   userIsLogin: boolean = false;
-
   constructor(
     private router: Router,
     private tokenService: TokenService) {
@@ -20,10 +19,7 @@ export class NavegationComponent implements OnInit {
       this.userIsLogin = true;
     }
   }
-
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
   admin() {
     this.router.navigate(['/admin/start'], { replaceUrl: false })
   }

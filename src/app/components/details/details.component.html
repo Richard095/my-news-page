@@ -32,7 +32,7 @@
             </p>
         </div>
         <div class="col-lg-10 d-flex justify-content-center">
-            <img class="image" src="{{ post.images[0].url }}" alt="img">
+            <img class="image" *ngIf="post.images.length > 0" src="{{post.images[0].url}}" alt="img">
         </div>
         <hr width="100%">
 
@@ -56,7 +56,8 @@
                             </div>
                             <div class="col-lg-2">
                                 <Button (click)="commentPost()" [ngClass]="{'send': comment.comment}"
-                                    [disabled]="comment.comment === ''" class="send-button">Comentar</Button>
+                                    [disabled]="comment.comment === '' || comment.comment === undefined"
+                                    class="send-button">Comentar</Button>
                             </div>
                         </div>
                     </div>

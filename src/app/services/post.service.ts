@@ -12,9 +12,9 @@ export class PostService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getPosts(): Observable<Post> {
+  public getPosts(category: string): Observable<Post> {
     const uri = this.URI_API + "/post";
-    return this.httpClient.get(uri);
+    return this.httpClient.get(uri, { params: { category } });
   }
 
   public getPostById(id: string): Observable<Post> {

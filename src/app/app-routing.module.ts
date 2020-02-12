@@ -9,10 +9,10 @@ import { DetailsComponent } from './components/details/details.component';
 
 const routes: Routes = [
   {
-    path: '', pathMatch: 'full', redirectTo: 'home'
+    path: '', pathMatch: 'full', redirectTo: 'home/Tech'
   },
   {
-    path: 'home', component: HomeComponent
+    path: 'home/:cattmpd', component: HomeComponent,
   },
   {
     path: 'login', component: LoginComponent, canActivate: [AuthLoginIgnoreGuard]

@@ -85,8 +85,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   //Comment post
 
   commentPost() {
+    console.log(this.post);
     this.comment.postId = this.post._id;
     this.comment.commentedBy = this.reactionStorage.getReaction();
+
+    console.log(this.post);
+
     this.postService.commentPost(this.comment).subscribe((res: any) => {
       this.comment.comment = '';
       this.socketIO.emit("newcomment", "comment")
@@ -99,9 +103,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     delete this.comment._id;
     delete this.comment.createdAt;
     delete this.comment.comment;
+
     this.postService.removeComment(this.comment).subscribe((res: any) => {
-      this.socketIO.emit("commentremoved", "comment")
+      this.socketIO.emit("commentremoved", "comment");
     }, error => console.log(error));
+
   }
 
   verifyCommentdBy(comments: Array<any>, id: string) {
