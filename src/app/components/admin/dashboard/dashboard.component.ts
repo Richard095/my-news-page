@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
 
   logOut() {
     this.tokenService.removeToken();
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home/', 'Tech'])
   }
 
   getProfile() {

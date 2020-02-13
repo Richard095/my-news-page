@@ -18,8 +18,9 @@ export class PostService {
   }
 
   public getPostById(id: string): Observable<Post> {
-    const uri = this.URI_API + "/post";
+    const uri = this.URI_API + "/post/all";
     return this.httpClient.get(uri).pipe(map((res: Post) => {
+
       let all: any = new Array<Post>();
       all = res;
       let postById: Post = {};
@@ -29,8 +30,14 @@ export class PostService {
           postById = post;
         }
       }
+      console.log(postById);
       return postById;
     }));
+  }
+
+  public getAllPosts(){
+    const uri = this.URI_API + "/post/all";
+    return this.httpClient.get(uri);
   }
 
   public deletePost(id: string): Observable<any> {

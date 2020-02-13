@@ -15,6 +15,7 @@ import { TokenInterceptorService } from './interceptors/token-interceptor.servic
 import { ModalComponent } from './components/modals/modal/modal.component';
 import { DetailsComponent } from './components/details/details.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { DateAgoPipe } from './shared/pipes/date-ago.pipe';
 const config: SocketIoConfig = { url: 'http://localhost:4000/', options: {} };
 
 @NgModule({
@@ -25,7 +26,8 @@ const config: SocketIoConfig = { url: 'http://localhost:4000/', options: {} };
     NavegationComponent,
     ErrorpageComponent,
     ModalComponent,
-    DetailsComponent
+    DetailsComponent,
+    DateAgoPipe
   ],
   imports: [
     BrowserModule,

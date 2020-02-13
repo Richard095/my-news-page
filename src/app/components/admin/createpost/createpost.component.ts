@@ -36,7 +36,7 @@ export class CreatepostComponent implements OnInit {
       { value: 'AI', viewValue: 'AI' }
     ]
     this.categorySelected = this.categorys[0].value;
-    this.router.navigate(['admin/createpost']);
+
   }
 
   ngOnInit() {

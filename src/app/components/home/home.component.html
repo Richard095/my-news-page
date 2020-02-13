@@ -5,10 +5,9 @@
 
 <div class="container">
 
-    <div class="row">
+    <div class="row m-2">
         <div class="col-6  mt-3 ">
             <h2>Ultimos articulos</h2>
-
         </div>
         <div class="col-6 mt-3">
             <p class="d-flex justify-content-end pr-3">{{date | date: 'dd/MM/yyyy, h:mm a'}}</p>
@@ -21,18 +20,16 @@
         <div class="col-8 mt-2">
             <div class="posts" *ngFor="let post of posts">
                 <div class="content-post p-3">
-                    <h5>{{ post.title }}</h5>
-                    <p>Publicado el {{ post.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
                     <div class="row">
-                        <div class="col-lg-8 col-12 mt-2">
+                        <div class="col-lg-10 col-12 mt-2">
+                            <h5>{{ post.title }}</h5>
+                            <p style="color: #444444;"> {{ post.createdAt | dateAgo}}</p>
                             <div class="text">
                                 <p>{{post.subtitle}}</p>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-4">
-
-                            <img *ngIf="post.images.length > 0" src="{{ post.images[0].url }}" class="img-fluid">
-
+                        <div class="col-12 col-lg-2  d-flex align-content-around flex-wrap">
+                            <img src="{{ post.images[0].url }}" class="img-fluid">
                             <button [routerLink]="['/detail/',post._id]" mat-button
                                 class="mt-2 btn-block button-open-detail">Leer
                                 mas</button>
@@ -44,9 +41,23 @@
 
         </div>
 
-        <div class="col-4 lign-self-end bg-primary  mt-2">
-            <div class="content-suggest-articles">
-                <h5>Articulos mas leidos</h5>
+        <div class="col-4 lign-self-end   mt-2">
+
+            <div class="content-post p-3">
+                <h5>Tambien te puede interesar</h5>
+                <hr width="100%">
+                <div class="content-recommend" *ngFor="let post of postsSuggested">
+
+                    <div class="content">
+                        <h6>{{post.title}}</h6>
+                        <p style="color: #444444; font-size: 12px;">{{ post.createdAt | dateAgo}}</p>
+                        <p class="seemore" style="color: #3d5afe; cursor: pointer; "
+                            [routerLink]="['/detail/',post._id]">Leer este
+                            articulo</p>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>

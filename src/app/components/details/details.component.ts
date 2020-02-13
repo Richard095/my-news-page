@@ -21,7 +21,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   reactions: string | number;
   exist: boolean;
   constructor(private socketIO: Socket, private postService: PostService, private activatedRoute: ActivatedRoute, private reactionStorage: ReactextService) {
-    this.post = { title: '', content: '', createdAt: '', images: [{ id: '', url: '' }], reactions: [{ _id: '', postedBy: '' }] }
+    this.post = { title: '', content: '', createdAt: '', category: '', images: [{ id: '', url: '' }], reactions: [{ _id: '', postedBy: '' }] }
     this.reaction = { postId: '', reactionId: '' }
     this.comment = {
       _id: '', commentedBy: '', postId: '', comment: '', commentId: '', createdAt: '',
@@ -55,13 +55,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   getPostById() {
     const params = this.activatedRoute.snapshot.params;
+
     this.postService.getPostById(params.id).subscribe((res: Post) => {
       this.post = res;
       this.reactions = this.post.reactions.length;
       this.comments = this.post.comments;
       this.comments.reverse();
+
       this.exist = this.verify(this.post.reactions, this.reactionStorage.getReaction())
-    }, (error) => { console.log(error) })
+    }, (error) => {
+
+      console.log(error)
+    })
   }
 
   giveReaction() {

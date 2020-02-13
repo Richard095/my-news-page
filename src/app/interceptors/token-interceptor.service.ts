@@ -12,7 +12,7 @@ export class TokenInterceptorService implements HttpInterceptor {
   constructor(private tokenService: TokenService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("Test intercetor");
+    //console.log("Test intercetor");
 
     if (this.tokenService.getToken() != null) {
       this.token = this.tokenService.getToken();
