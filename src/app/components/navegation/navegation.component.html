@@ -11,7 +11,7 @@
                 <button class="menu-item" [routerLink]="['/home/','Apple']" mat-menu-item>Apple</button>
                 <button class="menu-item" [routerLink]="['/home/','AI']" mat-menu-item>AI</button>
             </mat-menu>
-            <a mat-button class [routerLink]="['/']">Contact</a>
+            <a mat-button [routerLink]="['/home/','Tech']">Contact</a>
             <a mat-button class="admin-redirect" [style.visibility]="userIsLogin ? 'visible' : 'hidden'"
                 (click)="admin()">Dashboard </a>
         </mat-toolbar-row>

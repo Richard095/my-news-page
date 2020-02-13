@@ -38,10 +38,10 @@ export class HomeComponent implements OnInit {
             post.images[0] = { url: 'https://matthewsenvironmentalsolutions.com/images/com_hikashop/upload/not-available_1481220154.png' }
           }
         }
-        return res;
+        return res.posts;
       }))
       .subscribe((res: any) => {
-        this.posts = res.posts;
+        this.posts = res;
         this.posts.reverse();
         this.recomendedPosts();
 
@@ -62,9 +62,11 @@ export class HomeComponent implements OnInit {
             posts.push(post);
           }
         }
-        this.postsSuggested = this.getRecomendedPosts(posts, 5);
-        const xd = this.removeDuplicates(this.postsSuggested, 'category');
-        this.postsSuggested = xd;
+        if (posts.length > 0) {
+          this.postsSuggested = this.getRecomendedPosts(posts, 5);
+          const xd = this.removeDuplicates(this.postsSuggested, 'category');
+          this.postsSuggested = xd;
+        }
       })
 
   }

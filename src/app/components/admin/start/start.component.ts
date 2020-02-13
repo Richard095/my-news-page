@@ -4,7 +4,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
 import { MatDialog } from '@angular/material';
 import { ModalComponent } from '../../modals/modal/modal.component';
-
+import { Socket } from 'ngx-socket-io';
 @Component({
   selector: 'app-postlist',
   templateUrl: './start.component.html',
@@ -13,16 +13,22 @@ import { ModalComponent } from '../../modals/modal/modal.component';
 export class StartComponent implements OnInit {
 
   posts: Post[];
+  comments: Comment[];
   dataSource = this.posts;
   displayedColumns: string[] = ['createdAt', 'title', '_id'];
   processing: boolean = false;
   date = new Date();
-  constructor(private postService: PostService, public dialog: MatDialog) {
+  constructor(private socketIO: Socket, private postService: PostService, public dialog: MatDialog) {
     this.posts = [{ createdAt: '', title: '' }]
   }
 
   ngOnInit() {
+    this.socketIO.connect();
     this.getPosts();
+    this.getComments()
+    this.socketIO.on("newcomment", (event) => { this.getComments() });
+    this.socketIO.on("commentremoved", (event) => { this.getComments(); });
+
   }
 
   getPosts() {
@@ -49,6 +55,12 @@ export class StartComponent implements OnInit {
         })
       }
     });
+  }
+
+  getComments() {
+    this.postService.getComments().subscribe((res: any) => {
+      this.comments = res;
+    }, (error) => console.log(error))
   }
 
 }

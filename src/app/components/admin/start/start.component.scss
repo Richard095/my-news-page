@@ -19,6 +19,10 @@
   background-image: url("https://image.flaticon.com/icons/svg/2009/2009904.svg");
   background-size: cover;
 }
+.anonymususer {
+  background-image: url("https://image.flaticon.com/icons/svg/1177/1177568.svg");
+  background-size: cover;
+}
 .list {
   width: 100%;
 }
@@ -28,5 +32,10 @@
 }
 
 .button-actions:hover {
+  cursor: pointer;
+}
+
+.comment:hover {
+  background: #f2f2f2;
   cursor: pointer;
 }

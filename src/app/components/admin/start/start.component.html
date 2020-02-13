@@ -7,8 +7,6 @@
             <mat-card class="example-card">
 
 
-
-
                 <mat-card-header>
                     <div mat-card-avatar class="example-header-image"></div>
                     <mat-card-title>Noticias agregadas recientemente</mat-card-title>
@@ -16,8 +14,9 @@
                 </mat-card-header>
 
                 <mat-card-content>
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z list">
 
+                    <!-- Table content list news last week -->
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z list">
                         <!-- Checkbox Column -->
                         <ng-container matColumnDef="createdAt">
                             <th class="pr-2" mat-header-cell *matHeaderCellDef>Created at</th>
@@ -59,20 +58,38 @@
                 <mat-card-header>
                     <div mat-card-avatar class="image-notification"></div>
                     <mat-card-title>Notificaciones</mat-card-title>
-                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                    <mat-card-subtitle>Ultimos comentarios</mat-card-subtitle>
                 </mat-card-header>
-
+                <hr>
                 <mat-card-content>
-                    <p>
-                        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                        bred for hunting.
-                    </p>
+                    <!-- Item comment -->
+                    <div class=" p-0 m-0" *ngFor="let comment of comments">
+                        <div class="row p-0  comment" style="margin-top: 10px; ">
+                            <div class="col-lg-2 d-flex align-items-center ">
+                                <div mat-card-avatar class="anonymususer"></div>
+                            </div>
+                            <div class="col-lg-10 ">
+                                <div class="row p-0 m-0">
+                                    <div class="col-lg-8 p-0 m-0">
+                                        <p style="padding: 0px; margin: 0px; color: #3d5afe; ">
+                                            Alguien comento x post
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4 m-0 p-0">
+                                        <p style="font-size:small; color: #666666;" class="m-0 p-0">
+                                            {{comment.createdAt | amTimeAgo:'minute'}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <p style="padding: 0px; margin: 0px; color: #000; font-size:small ;">
+                                    {{comment.comment}}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
                 </mat-card-content>
-                <mat-card-actions>
-                    <button mat-button>LIKE</button>
-                    <button mat-button>SHARE</button>
-                </mat-card-actions>
+
             </mat-card>
         </div>
     </div>

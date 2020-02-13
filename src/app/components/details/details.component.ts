@@ -5,7 +5,7 @@ import { Post, IGiveReaction, Comment } from 'src/app/models/Post';
 import { ReactextService } from 'src/app/services/reactext.service';
 import uuidv4 from 'uuid/v4';
 import { Socket } from 'ngx-socket-io';
-import { error } from 'protractor';
+
 
 @Component({
   selector: 'app-details',

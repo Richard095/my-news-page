@@ -35,7 +35,7 @@ export class PostService {
     }));
   }
 
-  public getAllPosts(){
+  public getAllPosts() {
     const uri = this.URI_API + "/post/all";
     return this.httpClient.get(uri);
   }
@@ -69,6 +69,11 @@ export class PostService {
   public removeComment(comment: Comment) {
     const uri = "http://localhost:4000/post/removecomment";
     return this.httpClient.post(uri, comment);
+  }
+
+  public getComments(): Observable<Comment> {
+    const uri = "http://localhost:4000/post/comment";
+    return this.httpClient.get(uri);
   }
 
   //It will be changed to user service.
