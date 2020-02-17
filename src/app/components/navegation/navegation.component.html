@@ -1,19 +1,43 @@
-<div class="topnav toolbar" id="myTopnav">
-    <div class="container ">
-        <mat-toolbar-row>
-            <a mat-button class [routerLink]="['/home/','Tech']">Home</a>
-            <!-- <a mat-button class [routerLink]="['/']">Trends</a> -->
-            <a mat-button class class="menu-section" [matMenuTriggerFor]="menu">Sections</a>
-            <mat-menu #menu="matMenu" class="section">
-                <button [routerLink]="['/home/','Innovations']" class="menu-item" mat-menu-item>Innovations</button>
-                <button class="menu-item" [routerLink]="['/home/','Applications']" mat-menu-item>Applications</button>
-                <button class="menu-item" [routerLink]="['/home/','Android']" mat-menu-item>Android</button>
-                <button class="menu-item" [routerLink]="['/home/','Apple']" mat-menu-item>Apple</button>
-                <button class="menu-item" [routerLink]="['/home/','AI']" mat-menu-item>AI</button>
-            </mat-menu>
-            <a mat-button [routerLink]="['/home/','Tech']">Contact</a>
-            <a mat-button class="admin-redirect" [style.visibility]="userIsLogin ? 'visible' : 'hidden'"
-                (click)="admin()">Dashboard </a>
-        </mat-toolbar-row>
-    </div>
+<!-- Navigation -->
+<div class="container-fluid" style="margin-bottom:50px;">
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="background-color: #000000;">
+        <div class="container">
+            <a class="navbar-brand title" [routerLink]="['/home/','Tech']"> tmp news </a>
+            <button class="navbar-toggler menu-icon" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <mat-icon style="color: white;">menu</mat-icon>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a style="color: white;" class="nav-link" [routerLink]="['/home/','Tech']">Inicio
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a style="color: white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categorias
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" [routerLink]="['/home/','Innovations']">Innovación</a>
+                            <a class="dropdown-item" [routerLink]="['/home/','Applications']">Aplicaciones</a>
+                            <a class="dropdown-item" [routerLink]="['/home/','Android']">Android</a>
+                            <a class="dropdown-item" [routerLink]="['/home/','Apple']">Apple</a>
+                            <a class="dropdown-item" [routerLink]="['/home/','AI']">Inteligencia Artificial</a>
+                            <!-- <div class="dropdown-divider"></div> -->
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: white;" class="nav-link">Contacto</a>
+                    </li>
+                    <li class="nav-item" [style.visibility]="userIsLogin ? 'visible' : 'hidden'">
+                        <a style="color: white; cursor: pointer;" class="nav-link" (click)="admin()">Dashboard</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
 </div>

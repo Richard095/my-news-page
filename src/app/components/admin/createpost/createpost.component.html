@@ -2,8 +2,8 @@
 
     <div class="row content ">
         <div class="col">
-            <mat-progress-bar [style.visibility]="processing ? 'visible' : 'hidden'" class="" mode="indeterminate">
-            </mat-progress-bar>
+            <!-- <mat-progress-bar [style.visibility]="processing ? 'visible' : 'hidden'" class="" mode="indeterminate">
+            </mat-progress-bar> -->
             <mat-card class="example-card">
                 <mat-card-header>
                     <div mat-card-avatar class="example-header-image"></div>
@@ -67,10 +67,11 @@
                                     </button>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-6">
-                                    <button mat-flat-button color="primary"
-                                        [disabled]="post.content  && post.title && subtitle   === ''  "
+                                    <button [class.spinner]="processing" mat-flat-button color="primary"
+                                        [disabled]="post.content  && post.title && post.subtitle   === ''  "
                                         class="btn-block button-actions" (click)="isEdit ? updatePost() : addPost()">
-                                        <mat-icon>send</mat-icon>
+                                        <mat-icon [style.visibility]="!processing ? 'visible' : 'hidden'">send
+                                        </mat-icon>
                                     </button>
                                 </div>
                             </div>

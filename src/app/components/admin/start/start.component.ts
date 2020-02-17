@@ -5,6 +5,7 @@ import { Post } from 'src/app/models/Post';
 import { MatDialog } from '@angular/material';
 import { ModalComponent } from '../../modals/modal/modal.component';
 import { Socket } from 'ngx-socket-io';
+import { DetailpostComponent } from '../../modals/detailpost/detailpost.component';
 @Component({
   selector: 'app-postlist',
   templateUrl: './start.component.html',
@@ -60,7 +61,23 @@ export class StartComponent implements OnInit {
   getComments() {
     this.postService.getComments().subscribe((res: any) => {
       this.comments = res;
+      this.comments.reverse();
     }, (error) => console.log(error))
+  }
+
+  previewPostCommented(_id, commentId) {
+
+    const dialogRef = this.dialog.open(
+      DetailpostComponent,
+      {
+        width: '80%',
+        height: '80%',
+        data: { _id: _id, commentId: commentId },
+
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(result);
+    });
   }
 
 }

@@ -13,6 +13,7 @@ import { TokenService } from 'src/app/services/token.service';
 export class NavegationComponent implements OnInit {
   userIsLogin: boolean = false;
   constructor(
+
     private router: Router,
     private tokenService: TokenService) {
     if (this.tokenService.getToken() !== null) {
@@ -22,17 +23,6 @@ export class NavegationComponent implements OnInit {
   ngOnInit() { }
   admin() {
     this.router.navigate(['/admin/start'], { replaceUrl: false })
-  }
-
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(e) {
-    if (window.pageYOffset > 150) {
-      let element = document.getElementById('myTopnav');
-      element.classList.add('sticky');
-    } else {
-      let element = document.getElementById('myTopnav');
-      element.classList.remove('sticky');
-    }
   }
 
 }

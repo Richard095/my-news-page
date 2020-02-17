@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
-import { Post } from 'src/app/models/Post';
+import { Post, Category } from 'src/app/models/Post';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from "rxjs/operators"
-interface Category {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-createpost',
@@ -25,8 +20,16 @@ export class CreatepostComponent implements OnInit {
   isEdit: boolean = false;
   categorys: Category[];
   categorySelected: string;
-  constructor(private postService: PostService, private activatedRoute: ActivatedRoute, private router: Router) {
-    this.post = { title: '', category: '', subtitle: '', content: '' }
+
+  constructor(
+    private postService: PostService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
+    this.post = {
+      title: '', category: '', subtitle: '', content: ''
+    }
+
     this.categorys = [
       { value: 'Tech', viewValue: 'Tech' },
       { value: 'Innovations', viewValue: 'Innovations' },
@@ -35,7 +38,7 @@ export class CreatepostComponent implements OnInit {
       { value: 'Apple', viewValue: 'Apple' },
       { value: 'AI', viewValue: 'AI' }
     ]
-    this.categorySelected = this.categorys[0].value;
+    this.categorySelected = this.categorys[0].value; //For select value
 
   }
 
@@ -47,7 +50,7 @@ export class CreatepostComponent implements OnInit {
           this.post = res;
           this.isEdit = true;
         }, (error) => {
-
+          //console.log(error);
         })
     }
 
@@ -147,7 +150,7 @@ export class CreatepostComponent implements OnInit {
       this.router.navigate(['admin/start'], { replaceUrl: true });
     }, (error) => {
       this.processing = false;
-      console.log(error)
+      //console.log(error)
     }
     )
 

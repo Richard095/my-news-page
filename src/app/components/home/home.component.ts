@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
 import { Router, ActivatedRoute, RouterEvent, NavigationEnd } from '@angular/router';
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   posts: Post[];
   date = new Date();
   postsSuggested: Post[] = new Array();
-
+  myButton: any;
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private router: Router) {
     this.posts = [{ images: [{ url: '' }] }]
   }
@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     ).subscribe(() => {
       this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
     });
+    this.myButton = document.getElementById("myBtn");
 
   }
 
@@ -89,6 +90,21 @@ export class HomeComponent implements OnInit {
       newArray.push(lookupObject[i]);
     }
     return newArray;
+  }
+
+  topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+
+    if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+      this.myButton.style.display = "block";
+    } else {
+      this.myButton.style.display = "none";
+    }
   }
 
 }

@@ -17,7 +17,11 @@ import { DetailsComponent } from './components/details/details.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { PipeAgoModule } from './pipe.module';
 import { MomentModule } from 'ngx-moment';
-const config: SocketIoConfig = { url: 'http://localhost:4000/', options: {} };
+import { DetailpostComponent } from './components/modals/detailpost/detailpost.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FotterComponent } from './components/fotter/fotter.component';
+
+const config: SocketIoConfig = { url: 'http://192.168.1.104:4000/', options: {} };
 
 @NgModule({
   declarations: [
@@ -28,6 +32,8 @@ const config: SocketIoConfig = { url: 'http://localhost:4000/', options: {} };
     ErrorpageComponent,
     ModalComponent,
     DetailsComponent,
+    DetailpostComponent,
+    FotterComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +46,7 @@ const config: SocketIoConfig = { url: 'http://localhost:4000/', options: {} };
     AppRoutingModule,
     PipeAgoModule,
     MomentModule,
+    NgbModule,
     SocketIoModule.forRoot(config)
   ],
   providers: [
@@ -51,7 +58,8 @@ const config: SocketIoConfig = { url: 'http://localhost:4000/', options: {} };
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ModalComponent
+    ModalComponent,
+    DetailpostComponent
   ]
 })
 export class AppModule { }

@@ -10,7 +10,7 @@ export class AuthLoginIgnoreGuard implements CanActivate {
   constructor(private router: Router, private tokenService: TokenService) { }
   canActivate(): Observable<boolean> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.tokenService.getToken() != null) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/', 'Tech']);
       return false;
     }
     return true;

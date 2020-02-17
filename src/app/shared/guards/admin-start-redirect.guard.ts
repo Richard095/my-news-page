@@ -15,7 +15,7 @@ export class AdminStartRedirectGuard implements CanActivate {
       this.router.navigate(['/admin/start']);
       return true;
     }
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home/']);
     return false;
   }
 

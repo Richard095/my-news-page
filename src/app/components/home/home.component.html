@@ -1,21 +1,6 @@
-<div>
-    <div class="banner"></div>
-</div>
 <app-navegation></app-navegation>
-
 <div class="container">
-
-    <div class="row m-2">
-        <div class="col-6  mt-3 ">
-            <h2>Ultimos articulos</h2>
-        </div>
-        <div class="col-6 mt-3">
-            <p class="d-flex justify-content-end pr-3">{{date | amParseZone | amDateFormat: 'LLLL (Z)'}}</p>
-        </div>
-        <hr width="100%">
-    </div>
-
-    <div class="row  post-content p-3">
+    <div class="row post-content p-3">
         <!-- container Tech news -->
         <div class="col-lg-8 col-md-8 col-12 mt-2">
             <div class="posts" *ngFor="let post of posts">
@@ -59,6 +44,9 @@
         </div>
 
     </div>
-
-
+    <button (click)="topFunction()" id="myBtn" class="button-floating seemore" mat-fab
+        aria-label="Example icon-button with a heart icon">
+        <mat-icon>expand_less</mat-icon>
+    </button>
 </div>
+<app-fotter></app-fotter>

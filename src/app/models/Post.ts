@@ -32,3 +32,8 @@ export interface Comment {
   commentId?: string;
   createdAt?: string;
 }
+
+export interface Category {
+  value: string;
+  viewValue: string;
+}
