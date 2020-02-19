@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
-
 import { User } from 'src/app/models/User';
 
 @Component({
@@ -18,11 +17,12 @@ export class DashboardComponent implements OnInit {
     this.user = { name: '', email: '' }
     this.router.navigate(['/admin/start'], { replaceUrl: true })
     this.hasHistory = this.router.navigated;
-
   }
 
   ngOnInit() {
-    this.getProfile();
+    this.userService.getProfile().subscribe((res: User) => {
+      this.user = res;
+    }, (error) => console.log(error));
   }
 
   toggleSideBar() {
@@ -37,14 +37,6 @@ export class DashboardComponent implements OnInit {
   logOut() {
     this.tokenService.removeToken();
     this.router.navigate(['/home/', 'Tech'])
-  }
-
-  getProfile() {
-    this.userService.getProfile().subscribe((res: User) => {
-      this.user = res;
-    }, (error) => {
-      console.log(error);
-    });
   }
 
 }

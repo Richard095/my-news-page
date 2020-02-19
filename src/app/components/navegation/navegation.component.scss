@@ -20,6 +20,19 @@
   padding: 2px;
 }
 
+.dropdown-menu {
+  background: #000000;
+  outline: none;
+  border: none;
+  border-radius: 0;
+}
+.dropdown-item {
+  color: white;
+}
+.dropdown-item:hover {
+  color: #000000;
+}
+
 //Dropdown
 /* Change this breakpoint if you change the breakpoint of the navbar */
 

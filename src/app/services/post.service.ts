@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PostService {
-  private URI_API: string = "http://192.168.1.104:4000";
+  private URI_API: string = "http://192.168.1.101:4000";
   // private URI_API: string = "http://localhost:4000";
   constructor(private httpClient: HttpClient) { }
 

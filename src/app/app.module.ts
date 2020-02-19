@@ -21,7 +21,7 @@ import { DetailpostComponent } from './components/modals/detailpost/detailpost.c
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FotterComponent } from './components/fotter/fotter.component';
 
-const config: SocketIoConfig = { url: 'http://192.168.1.104:4000/', options: {} };
+const config: SocketIoConfig = { url: 'http://192.168.1.101:4000/', options: {} };
 
 @NgModule({
   declarations: [

@@ -66,17 +66,15 @@ export class StartComponent implements OnInit {
   }
 
   previewPostCommented(_id, commentId) {
-
     const dialogRef = this.dialog.open(
       DetailpostComponent,
       {
         width: '80%',
         height: '80%',
         data: { _id: _id, commentId: commentId },
-
       });
     dialogRef.afterClosed().subscribe(result => {
-      //console.log(result);
+      console.log(result);
     });
   }
 

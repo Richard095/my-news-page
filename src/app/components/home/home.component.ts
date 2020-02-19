@@ -10,48 +10,43 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  posts: Post[];
+  posts: Post[] = [];
   date = new Date();
   postsSuggested: Post[] = new Array();
   myButton: any;
+  hasposts: boolean = false;
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private router: Router) {
     this.posts = [{ images: [{ url: '' }] }]
   }
 
   ngOnInit() {
     this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
-    this.router.events.pipe(
-      filter((event: RouterEvent) => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
-    });
+    this.router.events
+      .pipe(filter((event: RouterEvent) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
+      });
     this.myButton = document.getElementById("myBtn");
-
   }
 
-  //Get all posts by category
   getPosts(category: string) {
     this.postService.getPosts(category)
       .pipe(map((res: any) => {
         for (let i = 0; i < res.posts.length; i++) {
           const post = res.posts[i];
-          if (post.images.length === 0) {
-            post.images[0] = { url: 'https://matthewsenvironmentalsolutions.com/images/com_hikashop/upload/not-available_1481220154.png' }
-          }
+          if (post.images.length === 0) post.images[0] = { url: '/assets/notimage.png' }
         }
         return res.posts;
       }))
       .subscribe((res: any) => {
         this.posts = res;
         this.posts.reverse();
+        if (this.posts.length > 0) this.hasposts = true;
         this.recomendedPosts();
-
-      }, (error) => {
-        //console.log(error);
-      })
+      }, (error) => console.log(error))
   }
 
-  //Getting 5 posts for recommend with currently category 
+  //Getting five posts for recommend with currently category 
   recomendedPosts() {
     this.postService.getAllPosts()
       .subscribe(async (res: any) => {
@@ -59,9 +54,7 @@ export class HomeComponent implements OnInit {
         let posts: Post[] = new Array();
         for (let i = 0; i < allposts.length; i++) {
           const post = allposts[i];
-          if (post.category !== this.activatedRoute.snapshot.params.cattmpd) {
-            posts.push(post);
-          }
+          if (post.category !== this.activatedRoute.snapshot.params.cattmpd) posts.push(post);
         }
         if (posts.length > 0) {
           this.postsSuggested = this.getRecomendedPosts(posts, 5);
@@ -99,7 +92,6 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
-
     if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
       this.myButton.style.display = "block";
     } else {

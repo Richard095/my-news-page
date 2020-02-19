@@ -6,13 +6,13 @@ import { Injectable } from '@angular/core';
 export class ReactextService {
 
   constructor() { }
-  saveReaction(key: string) {
+  saveUserId(key: string) {
     localStorage.setItem('key', key);
   }
-  getReaction() {
+  getUserId() {
     return localStorage.getItem('key');
   }
-  removeReaction() {
+  removeUserId() {
     localStorage.removeItem('key');
   }
 

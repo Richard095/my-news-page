@@ -5,6 +5,7 @@ import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 import { CreatepostComponent } from './createpost/createpost.component';
 import { StartComponent } from './start/start.component';
 import { AdminStartRedirectGuard } from 'src/app/shared/guards/admin-start-redirect.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,9 @@ const routes: Routes = [
       },
       {
         path: 'createpost/edit/:id', component: CreatepostComponent
+      },
+      {
+        path: 'profile', component: ProfileComponent
       }
     ]
 

@@ -55,9 +55,9 @@
 }
 
 .angular-with-newlines {
-  white-space: pre-wrap;
+  //white-space: pre-wrap;
   text-align: justify;
-  text-justify: inter-word;
+  //text-justify: inter-word;
 }
 .send-button {
   background: none;
@@ -97,4 +97,52 @@
   padding-top: 5px;
   text-align: justify;
   text-justify: inter-word;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  .title {
+    font-size: 18px;
+    text-align: start;
+  }
+  .createdAt {
+    font-size: 12px;
+    text-align: justify;
+    height: 100%;
+    padding-top: 15px;
+  }
+  .content-new {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  .content-detail {
+    margin-top: 0;
+  }
+  .hr {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .bx {
+    width: 100%;
+  }
+  .container {
+    padding-left: 0px;
+    margin-left: 0px;
+  }
+  .comments {
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .box-comment-container {
+    width: 100%;
+  }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
 }

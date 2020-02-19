@@ -1,6 +1,6 @@
 <div class="container-fluid mt-3">
 
-    <div class="row content ">
+    <div class="row content">
         <div class="col">
             <!-- <mat-progress-bar [style.visibility]="processing ? 'visible' : 'hidden'" class="" mode="indeterminate">
             </mat-progress-bar> -->
@@ -39,12 +39,16 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-12 text-redaction">
-                            <mat-form-field style="height: 80%" class="btn-block">
+                        <div style="height: 80%" class="col-lg-12 mb-3 text-redaction">
+                            <!-- <mat-form-field style="height: 80%" class="btn-block">
                                 <textarea [(ngModel)]="post.content"
                                     style="background: #ffffff; height: 300px; max-height: 300px;" matInput
                                     placeholder="Redacta aqui tu noticia"></textarea>
-                            </mat-form-field>
+
+                            </mat-form-field> -->
+                            <!-- <hr> -->
+                            <quill-editor [modules]="config" [styles]="editorStyle" [(ngModel)]="post.content">
+                            </quill-editor>
                         </div>
                     </div>
 
@@ -68,7 +72,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-6">
                                     <button [class.spinner]="processing" mat-flat-button color="primary"
-                                        [disabled]="post.content  && post.title && post.subtitle   === ''  "
+                                        [disabled]="post.title && post.subtitle &&  post.content === ''  "
                                         class="btn-block button-actions" (click)="isEdit ? updatePost() : addPost()">
                                         <mat-icon [style.visibility]="!processing ? 'visible' : 'hidden'">send
                                         </mat-icon>

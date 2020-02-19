@@ -8,12 +8,15 @@ import { StartComponent } from './start/start.component';
 import { FormsModule } from '@angular/forms';
 import { PipeAgoModule } from 'src/app/pipe.module';
 import { MomentModule } from 'ngx-moment';
+import { ProfileComponent } from './profile/profile.component';
+import { QuillModule } from "ngx-quill";
 
 @NgModule({
   declarations: [
     DashboardComponent,
     CreatepostComponent,
     StartComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -21,7 +24,8 @@ import { MomentModule } from 'ngx-moment';
     MaterialModule,
     FormsModule,
     PipeAgoModule,
-    MomentModule
+    MomentModule,
+    QuillModule.forRoot()
   ]
 })
 export class AdminModule { }

@@ -1,6 +1,4 @@
 <div id="scroll" class="row   ml-3 mr-3 mt-2 d-flex justify-content-center pb-3">
-
-
     <div class="col-lg-10 ">
         <div class="row ml-1">
             <h6>{{post.title}}</h6>
@@ -25,9 +23,7 @@
             <img class="image" style="width: 90%;" *ngIf="post.images !== undefined" src="{{post.images[0].url}}"
                 alt="img">
         </div>
-        <p class="angular-with-newlines">
-            {{ post.content }}
-        </p>
+        <p class="angular-with-newlines" [innerHTML]="post.content"> </p>
     </div>
     <hr width="100%">
 

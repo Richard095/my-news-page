@@ -1,0 +1,19 @@
+.profile-card {
+  text-align: center;
+  padding: 0 20px 20px 20px;
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+.box {
+  background: #f2f2f2;
+  height: 100%;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

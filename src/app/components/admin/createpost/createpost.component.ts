@@ -14,22 +14,32 @@ export class CreatepostComponent implements OnInit {
   date = new Date();
   files: any = [FileList];
   imagesFiles: any = [];
-  post: Post;
+  categorys: Category[] = [];
   formData: any = new FormData();
   imageContainer: any;
   isEdit: boolean = false;
-  categorys: Category[];
   categorySelected: string;
+  post: Post;
 
-  constructor(
-    private postService: PostService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) {
+  editorStyle = {
+    height: '350px'
+  };
+
+  config = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      ['code-block'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      ['clean'],
+      [{ 'direction': 'rtl' }],
+      [{ 'indent': '-1' }, { 'indent': '+1' }],
+    ]
+  }
+  constructor(private postService: PostService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.post = {
       title: '', category: '', subtitle: '', content: ''
     }
-
     this.categorys = [
       { value: 'Tech', viewValue: 'Tech' },
       { value: 'Innovations', viewValue: 'Innovations' },
@@ -39,7 +49,6 @@ export class CreatepostComponent implements OnInit {
       { value: 'AI', viewValue: 'AI' }
     ]
     this.categorySelected = this.categorys[0].value; //For select value
-
   }
 
   ngOnInit() {
@@ -49,11 +58,8 @@ export class CreatepostComponent implements OnInit {
         .subscribe((res: Post) => {
           this.post = res;
           this.isEdit = true;
-        }, (error) => {
-          //console.log(error);
-        })
+        }, (error) => console.log(error))
     }
-
   }
 
   onFileSelect(evt) {
@@ -61,9 +67,7 @@ export class CreatepostComponent implements OnInit {
     if (this.files.length === 0) return;
     for (let i = 0; i < this.files.length; i++) {
       const mimeType: any = this.files[i].type;
-      if (mimeType.match(/image\/*/)) {
-        this.imagesFiles.push(this.files[i]);
-      }
+      if (mimeType.match(/image\/*/)) this.imagesFiles.push(this.files[i]);
     }
     this.imagesFiles = this.removeDuplicateImages(this.imagesFiles, 'name');
     this.imageContainer = document.getElementById("content-images");
@@ -153,7 +157,6 @@ export class CreatepostComponent implements OnInit {
       //console.log(error)
     }
     )
-
   }
 
 }
