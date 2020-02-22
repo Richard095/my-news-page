@@ -1,6 +1,6 @@
 <app-navegation></app-navegation>
-<div class="container" [style.visibility]="hasposts ? 'visible' : 'hidden'">
-    <div class="row post-content p-3">
+<div class="container">
+    <div class="row post-content p-3" [style.visibility]=" hasposts ? 'visible' : 'hidden'">
         <!-- container Tech news -->
         <div class="col-lg-8 col-md-8 col-12 mt-2">
             <div class="posts" *ngFor="let post of posts">
@@ -8,7 +8,18 @@
                     <div class="row">
                         <div class="col-lg-10 col-12 mt-2">
                             <h5>{{ post.title }}</h5>
-                            <p style="color: #444444;"> {{ post.createdAt | amTimeAgo}}</p>
+                            <div class="row p-0 m-0 ">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-2 "
+                                    style="padding-left: 0px;padding-bottom: 0px">
+                                    <mat-icon class="example-icon" aria-hidden="false"
+                                        aria-label="Example user verified icon">access_time</mat-icon>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-10"
+                                    style="padding-left: 0px; padding-bottom: 0px;">
+                                    <p style="color: #444444;"> {{ post.createdAt | amTimeAgo}}</p>
+                                </div>
+                            </div>
+
                             <div class="text">
                                 <p>{{post.subtitle}}</p>
                             </div>

@@ -1,32 +1,46 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
 import { Router, ActivatedRoute, RouterEvent, NavigationEnd } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
-
+import { filter, map, share } from 'rxjs/operators';
+import { Socket } from 'ngx-socket-io';
+import { DataService } from 'src/app/services/data/data.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+
   posts: Post[] = [];
   date = new Date();
   postsSuggested: Post[] = new Array();
   myButton: any;
   hasposts: boolean = false;
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private router: Router) {
+
+  constructor(private _dataService: DataService, private socketIO: Socket, private activatedRoute: ActivatedRoute, private postService: PostService, private router: Router) {
     this.posts = [{ images: [{ url: '' }] }]
+    this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
   }
 
   ngOnInit() {
-    this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
+    this.socketIO.connect();
+    //socket
+    this.socketIO.on("newpost", (event) => {
+      this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
+    });
+
     this.router.events
       .pipe(filter((event: RouterEvent) => event instanceof NavigationEnd))
       .subscribe(() => {
         this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
       });
+
     this.myButton = document.getElementById("myBtn");
+  }
+
+  ngOnDestroy(): void {
+    this.socketIO.disconnect();
   }
 
   getPosts(category: string) {
@@ -41,8 +55,13 @@ export class HomeComponent implements OnInit {
       .subscribe((res: any) => {
         this.posts = res;
         this.posts.reverse();
+
         if (this.posts.length > 0) this.hasposts = true;
         this.recomendedPosts();
+
+        if (this._dataService.getData() !== null) this._dataService.removeData();
+        this._dataService.saveData(JSON.stringify(this.posts))
+
       }, (error) => console.log(error))
   }
 
@@ -60,9 +79,10 @@ export class HomeComponent implements OnInit {
           this.postsSuggested = this.getRecomendedPosts(posts, 5);
           const xd = this.removeDuplicates(this.postsSuggested, 'category');
           this.postsSuggested = xd;
+          //console.log(this.postsSuggested);
+          this._dataService.saveDataRecommend(JSON.stringify(this.postsSuggested))
         }
       })
-
   }
 
   getRecomendedPosts(posts, numPosts) {

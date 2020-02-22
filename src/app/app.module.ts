@@ -20,8 +20,8 @@ import { MomentModule } from 'ngx-moment';
 import { DetailpostComponent } from './components/modals/detailpost/detailpost.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FotterComponent } from './components/fotter/fotter.component';
-
-const config: SocketIoConfig = { url: 'http://192.168.1.101:4000/', options: {} };
+import { environment } from "../environments/environment";
+const config: SocketIoConfig = { url: environment.URL, options: {} };
 
 @NgModule({
   declarations: [

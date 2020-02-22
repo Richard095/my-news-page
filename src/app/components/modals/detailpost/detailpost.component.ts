@@ -36,9 +36,7 @@ export class DetailpostComponent implements OnInit, AfterViewInit {
 
     this.postService.getPostById(this._id).subscribe((res: Post) => {
       this.post = res;
-      if (this.post.images.length === 0) {
-        this.post.images[0] = { url: 'https://matthewsenvironmentalsolutions.com/images/com_hikashop/upload/not-available_1481220154.png' }
-      }
+      if (this.post.images.length === 0) this.post.images[0] = { url: '/assets/notimage.png' }
       const comments: any = this.post.comments;
       this.numReactions = this.post.reactions.length;
       for (let i = 0; i < comments.length; i++) {

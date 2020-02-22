@@ -3,13 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Post, IGiveReaction, Comment } from "../models/Post";
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
-import { map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
+import { environment } from "..//..//environments/environment";
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-  private URI_API: string = "http://192.168.1.101:4000";
-  // private URI_API: string = "http://localhost:4000";
+
+  private URI_API: string = environment.URL;
+
   constructor(private httpClient: HttpClient) { }
 
   //Funcions for Posts
@@ -18,28 +20,29 @@ export class PostService {
     return this.httpClient.get(uri, { params: { category } });
   }
 
-  public getAllPosts() {
+  public getAllPosts(): Observable<any> {
     const uri = this.URI_API + "/post/all";
-    return this.httpClient.get(uri);
+    return this.httpClient.get(uri)
   }
 
   public getPostById(id: string): Observable<Post> {
     const uri = this.URI_API + "/post/all";
-    return this.httpClient.get(uri).pipe(
-      map((response: Post) => {
-        let posts: any = new Array<Post>();
-        posts = response;
-        let postById: Post = {};
-        for (let i = 0; i < posts.posts.length; i++) {
-          const post = posts.posts[i];
-          if (post._id === id) {
-            postById = post;
+    return this.httpClient.get(uri)
+      .pipe(
+        map((response: Post) => {
+          let posts: any = new Array<Post>();
+          posts = response;
+          let postById: Post = {};
+          for (let i = 0; i < posts.posts.length; i++) {
+            const post = posts.posts[i];
+            if (post._id === id) {
+              postById = post;
+            }
           }
-
-        }
-        return postById;
-      })
-    );
+          return postById;
+        }, share()
+        )
+      );
   }
 
   public addPost(formData: FormData): Observable<Post> {
@@ -61,6 +64,12 @@ export class PostService {
     const uri = this.URI_API + '/post/reaction/';
     return this.httpClient.post(uri, reaction);
   }
+
+  public getReactions(id: string) {
+    const uri = this.URI_API + '/post/reaction/' + id;
+    return this.httpClient.get(uri);
+  }
+
   //Functions for comment posts
   public commentPost(comment: Comment): Observable<Comment> {
     const uri = this.URI_API + '/post/comment/';

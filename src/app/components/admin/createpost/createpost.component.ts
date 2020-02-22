@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Post, Category } from 'src/app/models/Post';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Socket } from 'ngx-socket-io';
 @Component({
   selector: 'app-createpost',
   templateUrl: './createpost.component.html',
   styleUrls: ['./createpost.component.scss']
 })
 
-export class CreatepostComponent implements OnInit {
+export class CreatepostComponent implements OnInit, OnDestroy {
+
   processing: boolean = false;
   date = new Date();
   files: any = [FileList];
@@ -36,7 +37,7 @@ export class CreatepostComponent implements OnInit {
       [{ 'indent': '-1' }, { 'indent': '+1' }],
     ]
   }
-  constructor(private postService: PostService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private socketIO: Socket, private postService: PostService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.post = {
       title: '', category: '', subtitle: '', content: ''
     }
@@ -52,6 +53,7 @@ export class CreatepostComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socketIO.connect();
     const params = this.activatedRoute.snapshot.params;
     if (params.id) {
       this.postService.getPostById(params.id)
@@ -60,6 +62,9 @@ export class CreatepostComponent implements OnInit {
           this.isEdit = true;
         }, (error) => console.log(error))
     }
+  }
+  ngOnDestroy(): void {
+    this.socketIO.disconnect();
   }
 
   onFileSelect(evt) {
@@ -108,6 +113,7 @@ export class CreatepostComponent implements OnInit {
     }
     this.processing = true;
     this.postService.addPost(this.formData).subscribe((res: Post) => {
+      this.socketIO.emit("newpost", "newpost")
       this.processing = false;
       this.post = { title: '', subtitle: '', content: '', category: '' }
       this.formData.delete('title');
@@ -119,6 +125,7 @@ export class CreatepostComponent implements OnInit {
       while (this.imageContainer.hasChildNodes()) {
         this.imageContainer.removeChild(this.imageContainer.lastChild);
       }
+      
 
     }, (error) => { this.processing = false; console.log(error); });
 
