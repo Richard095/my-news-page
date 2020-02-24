@@ -22,6 +22,8 @@ export class ContactComponent implements OnInit {
 
   contact: contact;
   processing: boolean = false;
+  durationInSeconds: 3000;
+  statusprocess: boolean = false;
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -30,15 +32,17 @@ export class ContactComponent implements OnInit {
   constructor(private contactService: ContactService, private router: Router) {
     this.contact = { name: '', email: '', matter: '' }
   }
-
   ngOnInit() { }
-
   send() {
-    console.log(this.contact)
+
     this.processing = true;
     this.contactService.sendEmail(this.contact).subscribe((res: any) => {
       this.contact = { name: '', email: '', matter: '' };
       this.processing = false;
+      this.statusprocess = true;
+      setTimeout(() => {
+        this.statusprocess = false;
+      }, 3000)
     }, error => {
       console.log(error); this.processing = false;
     })

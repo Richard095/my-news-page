@@ -15,7 +15,7 @@
                     </div>
                     <div class="content">
                         <p style="color: #f2f2f2;">
-                            Esta plataforma a sido creado con fines de informativos, y sobre todo lo que consierne
+                            Esta plataforma a sido creado con fines informativos, y sobre todo lo que consierne
                             al mundo de la tecnologia.Si desea tener contacto con nosotros puede enviarnos
                             un correo atraves del siguente formulario.
                         </p>
@@ -51,17 +51,27 @@
 
                     <mat-form-field style="width: 100%; margin: 5px">
                         <mat-label>Asunto</mat-label>
-                        <textarea [(ngModel)]="contact.matter" matInput
-                            placeholder="Ex. It makes me feel..."></textarea>
+                        <textarea [(ngModel)]="contact.matter" matInput></textarea>
                     </mat-form-field>
 
                     <button [class.spinner]="processing" mat-button
                         [disabled]="contact.name && contact.email &&  contact.matter === ''  " (click)="send()"
                         style="outline: none;
-                        border: none;width: 100%; color: #ffffff; margin: 5px; background-image: linear-gradient(to right, #4776E6, #8E54E9);">Enviar</button>
+                        border: none;width: 100%; color: #ffffff; margin: 5px; background-image: linear-gradient(to right, #4776E6, #8E54E9);">
+                        <p class="p-0 m-0" [style.visibility]="!processing ? 'visible' : 'hidden'">Enviar</p>
+                    </button>
+
+                    <div class="message m-2" [style.visibility]="statusprocess ? 'visible' : 'hidden'">
+                        <p class="p-2"
+                            style="color: #ffffff;background: #3d5afe; border-radius: 5px; text-align: center;">Correo
+                            enviado
+                            exitosamente.</p>
+                    </div>
+
 
                 </div>
             </div>
+
         </div>
     </div>
 </div>

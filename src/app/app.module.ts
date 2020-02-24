@@ -22,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FotterComponent } from './components/fotter/fotter.component';
 import { environment } from "../environments/environment";
 import { ContactComponent } from './components/contact/contact.component';
+
 const config: SocketIoConfig = { url: environment.URL, options: {} };
 
 @NgModule({
