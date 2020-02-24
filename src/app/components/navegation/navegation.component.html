@@ -29,7 +29,8 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a style="color: white;" class="nav-link">Contacto</a>
+                        <a style="color: white; cursor: pointer;" [routerLink]="['/contact']"
+                            class="nav-link">Contacto</a>
                     </li>
                     <li class="nav-item" [style.visibility]="userIsLogin ? 'visible' : 'hidden'">
                         <a style="color: white; cursor: pointer;" class="nav-link" (click)="admin()">Dashboard</a>

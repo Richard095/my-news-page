@@ -1,0 +1,67 @@
+<app-navegation></app-navegation>
+
+<div class="container d-flex justify-content-center" style="height:90%; width: 100%">
+
+    <div class="row container-form align-self-center p-0 m-0">
+        <div class="col-md-6" style=" background-image: linear-gradient(#4776E6, #8E54E9);">
+            <div class="box  d-flex align-content-beetween flex-wrap " style="height: 100%;">
+                <div class="logo mt-3" style=" width: 100%;">
+                    <h1 class="logo">tmp news</h1>
+                </div>
+                <div class="main">
+
+                    <div class="subtitle" style=" width: 100%;">
+                        <h3 style="color: #ffffff;">Contactanos</h3>
+                    </div>
+                    <div class="content">
+                        <p style="color: #f2f2f2;">
+                            Esta plataforma a sido creado con fines de informativos, y sobre todo lo que consierne
+                            al mundo de la tecnologia.Si desea tener contacto con nosotros puede enviarnos
+                            un correo atraves del siguente formulario.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-6 d-flex" style="background: #ffffff;">
+            <div class="box p-3 align-self-center">
+                <div class="example-form">
+                    <mat-form-field style="width: 100%; margin: 5px;">
+                        <mat-label>Nombre</mat-label>
+                        <input [(ngModel)]="contact.name" matInput>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="example-full-width" style="margin: 5px">
+                        <mat-label>Correo</mat-label>
+                        <input [(ngModel)]="contact.email" matInput [formControl]="emailFormControl"
+                            [errorStateMatcher]="matcher" placeholder="Ej. pat@ejemp.com">
+                        <mat-hint>Errors appear instantly!</mat-hint>
+                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                            Porfavor ingresa un correo valido
+                        </mat-error>
+                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                            El correo es <strong>requerido</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field style="width: 100%; margin: 5px">
+                        <mat-label>Asunto</mat-label>
+                        <textarea [(ngModel)]="contact.matter" matInput
+                            placeholder="Ex. It makes me feel..."></textarea>
+                    </mat-form-field>
+
+                    <button [class.spinner]="processing" mat-button
+                        [disabled]="contact.name && contact.email &&  contact.matter === ''  " (click)="send()"
+                        style="outline: none;
+                        border: none;width: 100%; color: #ffffff; margin: 5px; background-image: linear-gradient(to right, #4776E6, #8E54E9);">Enviar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

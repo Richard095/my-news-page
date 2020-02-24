@@ -6,6 +6,7 @@ import { NavegationComponent } from './components/navegation/navegation.componen
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { AuthLoginIgnoreGuard } from './shared/guards/auth-login-ignore.guard';
 import { DetailsComponent } from './components/details/details.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
   },
   {
     path: 'detail/:id', component: DetailsComponent
+  },
+  {
+    path: 'contact', component: ContactComponent
   },
   {
     path: '**', component: ErrorpageComponent

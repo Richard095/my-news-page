@@ -16,9 +16,7 @@ export class NavegationComponent implements OnInit {
 
     private router: Router,
     private tokenService: TokenService) {
-    if (this.tokenService.getToken() !== null) {
-      this.userIsLogin = true;
-    }
+    if (this.tokenService.getToken() !== null) this.userIsLogin = true;
   }
   ngOnInit() { }
   admin() {

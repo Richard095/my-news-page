@@ -80,7 +80,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           const xd = this.removeDuplicates(this.postsSuggested, 'category');
           this.postsSuggested = xd;
           //console.log(this.postsSuggested);
-          this._dataService.saveDataRecommend(JSON.stringify(this.postsSuggested))
+          if (this._dataService.getDataRecommend() !== null) this._dataService.removeDataRecommend();
+          this._dataService.saveDataRecommend(JSON.stringify(this.postsSuggested));
         }
       })
   }
