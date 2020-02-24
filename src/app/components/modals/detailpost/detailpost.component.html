@@ -3,13 +3,13 @@
         <div class="row ml-1">
             <h6>{{post.title}}</h6>
             <div class="col-lg-10 col-md-10 col-10 d-flex justify-content-start">
-                <p style="color: #444444;" class="pr-3">{{post.createdAt | amTimeAgo:'minute'}}</p>
+                <p style="color: #444444;" class="pr-3">{{post.createdAt | amTimeAgo}}</p>
             </div>
             <div class="col-lg-2 col-md-2 col-2 d-flex justify-content-end">
                 <button (click)="click()" mat-button class="reaction pr-3">
                     {{numReactions}}
-                    <mat-icon class="example-icon" [ngClass]="{'liked': exist, 'no-liked': !exist}"
-                        id="icon-reaction-id" aria-hidden="false" aria-label="Example delete icon">favorite
+                    <mat-icon class="example-icon" id="icon-reaction-id" aria-hidden="false"
+                        aria-label="Example delete icon">favorite
                     </mat-icon>
                 </button>
 
