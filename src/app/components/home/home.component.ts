@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.posts.reverse();
 
         if (this.posts.length > 0) this.hasposts = true;
-        this.recomendedPosts();
+        //this.recomendedPosts();
 
         if (this._dataService.getData() !== null) this._dataService.removeData();
         this._dataService.saveData(JSON.stringify(this.posts))
