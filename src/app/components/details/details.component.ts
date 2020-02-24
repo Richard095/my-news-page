@@ -64,18 +64,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
         this.comments = this.post.comments;
         this.comments.reverse();
         this.exist = this.verify(this.post.reactions, this.locStorage.getUserId())
-      } else {
-        const posts: Post[] = JSON.parse(this._dataService.getDataRecommend());
-        for (let j = 0; j < posts.length; j++) {
-          const post = posts[j];
-          if (post._id === id) {
-            this.post = post;
-            if (this.post) this.next = true;
-            this.comments = this.post.comments;
-            this.comments.reverse();
-            this.exist = this.verify(this.post.reactions, this.locStorage.getUserId())
-          }
-        }
+        // } else {
+        //   const posts: Post[] = JSON.parse(this._dataService.getDataRecommend());
+        //   for (let j = 0; j < posts.length; j++) {
+        //     const post = posts[j];
+        //     if (post._id === id) {
+        //       this.post = post;
+        //       if (this.post) this.next = true;
+        //       this.comments = this.post.comments;
+        //       this.comments.reverse();
+        //       this.exist = this.verify(this.post.reactions, this.locStorage.getUserId())
+        //     }
+        //   }
       }
     }
   }
