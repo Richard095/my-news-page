@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, RouterEvent, NavigationEnd } from '@angular/rou
 import { filter, map, share } from 'rxjs/operators';
 import { Socket } from 'ngx-socket-io';
 import { DataService } from 'src/app/services/data/data.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   postsSuggested: Post[] = new Array();
   myButton: any;
   hasposts: boolean = false;
+  private _routerSub = Subscription.EMPTY;
 
   constructor(private _dataService: DataService, private socketIO: Socket, private activatedRoute: ActivatedRoute, private postService: PostService, private router: Router) {
     this.posts = [{ images: [{ url: '' }] }]
@@ -30,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
     });
 
-    this.router.events
+    this._routerSub = this.router.events
       .pipe(filter((event: RouterEvent) => event instanceof NavigationEnd))
       .subscribe(() => {
         this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
@@ -41,6 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.socketIO.disconnect();
+    this._routerSub.unsubscribe()
   }
 
   getPosts(category: string) {
