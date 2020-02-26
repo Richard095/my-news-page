@@ -6,7 +6,7 @@ import { ReactextService } from 'src/app/services/reactext.service';
 import uuidv4 from 'uuid/v4';
 import { Socket } from 'ngx-socket-io';
 import { share } from 'rxjs/operators';
-import { EmmiterService } from 'src/app/services/services/emmiter.service';
+import { EmmiterService } from 'src/app/services/emmiter.service';
 
 @Component({
   selector: 'app-details',

@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, Inject, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
-import { EmmiterService } from 'src/app/services/services/emmiter.service';
+import { EmmiterService } from 'src/app/services/emmiter.service';
 
 @Component({
   selector: 'app-navegation',

@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, RouterEvent, NavigationEnd } from '@angular/rou
 import { filter, map, share } from 'rxjs/operators';
 import { Socket } from 'ngx-socket-io';
 import { Subscription } from 'rxjs';
-import { EmmiterService } from 'src/app/services/services/emmiter.service';
+import { EmmiterService } from 'src/app/services/emmiter.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

@@ -3,7 +3,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 import { User } from 'src/app/models/User';
-import { EmmiterService } from 'src/app/services/services/emmiter.service';
+import { EmmiterService } from 'src/app/services/emmiter.service';
 
 @Component({
   selector: 'app-dashboard',
