@@ -3,7 +3,7 @@ import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/auth/user.service';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
-import { EmmiterService } from '../..//services/emmiter.service';
+import { EmmiterService } from 'src/app/services/emmiter.service';
 
 @Component({
   selector: 'app-login',
