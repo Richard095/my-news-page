@@ -7,19 +7,20 @@ import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { AuthLoginIgnoreGuard } from './shared/guards/auth-login-ignore.guard';
 import { DetailsComponent } from './components/details/details.component';
 import { ContactComponent } from './components/contact/contact.component';
-
+import { PostResolverGuard } from './shared/resolvers/post-resolver.guard';
+import { DetailResolverGuard } from './shared/resolvers/detail-resolver.guard';
 const routes: Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: 'home/Tech'
   },
   {
-    path: 'home/:cattmpd', component: HomeComponent,
+    path: 'home/:cattmpd', component: HomeComponent, resolve: { PostResolverGuard }
   },
   {
     path: 'login', component: LoginComponent, canActivate: [AuthLoginIgnoreGuard]
   },
   {
-    path: 'detail/:id', component: DetailsComponent
+    path: 'detail/:id', component: DetailsComponent, resolve: { DetailResolverGuard }
   },
   {
     path: 'contact', component: ContactComponent

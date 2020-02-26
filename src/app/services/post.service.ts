@@ -45,6 +45,11 @@ export class PostService {
       );
   }
 
+
+  getPost(id:string):Observable<Post>{
+    return this.httpClient.get(this.URI_API+'/post/'+id);
+  }
+
   public addPost(formData: FormData): Observable<Post> {
     const uri = this.URI_API + "/post/";
     return this.httpClient.post(uri, formData);
@@ -59,6 +64,7 @@ export class PostService {
     const uri = this.URI_API + "/post/" + id;
     return this.httpClient.delete(uri);
   }
+
   //Functions for reaction to post
   public giveReaction(reaction: IGiveReaction) {
     const uri = this.URI_API + '/post/reaction/';

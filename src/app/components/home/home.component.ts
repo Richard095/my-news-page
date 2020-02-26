@@ -4,8 +4,8 @@ import { Post } from 'src/app/models/Post';
 import { Router, ActivatedRoute, RouterEvent, NavigationEnd } from '@angular/router';
 import { filter, map, share } from 'rxjs/operators';
 import { Socket } from 'ngx-socket-io';
-import { DataService } from 'src/app/services/data/data.service';
 import { Subscription } from 'rxjs';
+import { EmmiterService } from 'src/app/services/services/emmiter.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,24 +20,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   hasposts: boolean = false;
   private _routerSub = Subscription.EMPTY;
 
-  constructor(private _dataService: DataService, private socketIO: Socket, private activatedRoute: ActivatedRoute, private postService: PostService, private router: Router) {
+  constructor(private emmiter: EmmiterService, private socketIO: Socket, private activatedRoute: ActivatedRoute, private postService: PostService, private router: Router) {
     this.posts = [{ images: [{ url: '' }] }]
-    this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
+    this.getPosts();
+    this.emmiter.state.emit(true);
   }
 
   ngOnInit() {
     this.socketIO.connect();
-    //socket
-    this.socketIO.on("newpost", (event) => {
-      this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
-    });
-
-    this._routerSub = this.router.events
-      .pipe(filter((event: RouterEvent) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.getPosts(this.activatedRoute.snapshot.params.cattmpd);
-      });
-
+    this.socketIO.on("newpost", (event) => { this.getPosts(); });
     this.myButton = document.getElementById("myBtn");
   }
 
@@ -46,9 +37,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._routerSub.unsubscribe()
   }
 
-  getPosts(category: string) {
-    this.postService.getPosts(category)
+  getPosts() {
+    this.activatedRoute.data
       .pipe(map((res: any) => {
+        res = res.PostResolverGuard;
         for (let i = 0; i < res.posts.length; i++) {
           const post = res.posts[i];
           if (post.images.length === 0) post.images[0] = { url: '/assets/notimage.png' }
@@ -60,9 +52,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.posts.reverse();
         if (this.posts.length > 0) this.hasposts = true;
         this.recomendedPosts();
-        if (this._dataService.getData() !== null) this._dataService.removeData();
-        this._dataService.saveData(JSON.stringify(this.posts))
-
       }, (error) => console.log(error))
   }
 
@@ -80,9 +69,6 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.postsSuggested = this.getRecomendedPosts(posts, 5);
           const xd = this.removeDuplicates(this.postsSuggested, 'category');
           this.postsSuggested = xd;
-          //console.log(this.postsSuggested);
-          if (this._dataService.getDataRecommend() !== null) this._dataService.removeDataRecommend();
-          this._dataService.saveDataRecommend(JSON.stringify(this.postsSuggested));
         }
       })
   }

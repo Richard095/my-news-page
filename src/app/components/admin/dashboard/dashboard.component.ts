@@ -3,6 +3,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 import { User } from 'src/app/models/User';
+import { EmmiterService } from 'src/app/services/services/emmiter.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
   user: User;
   hasHistory: boolean = false;
-  constructor(private tokenService: TokenService, private router: Router, private userService: PostService) {
+  constructor(private emmiter: EmmiterService, private tokenService: TokenService, private router: Router, private userService: PostService) {
     this.user = { name: '', email: '' }
     this.router.navigate(['/admin/start'], { replaceUrl: true })
     this.hasHistory = this.router.navigated;
@@ -23,6 +24,8 @@ export class DashboardComponent implements OnInit {
     this.userService.getProfile().subscribe((res: User) => {
       this.user = res;
     }, (error) => console.log(error));
+
+    this.emmiter.state.emit(false);
   }
 
   toggleSideBar() {

@@ -38,10 +38,16 @@
   height: 80%;
   width: 80%;
 }
+.container {
+  padding-top: 80px;
+}
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
   .container-form {
     width: 100%;
+  }
+  .container {
+    padding-top: 30px;
   }
 }
 

@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { ModalComponent } from '../../modals/modal/modal.component';
 import { Socket } from 'ngx-socket-io';
 import { DetailpostComponent } from '../../modals/detailpost/detailpost.component';
+import { EmmiterService } from 'src/app/services/services/emmiter.service';
 @Component({
   selector: 'app-postlist',
   templateUrl: './start.component.html',
@@ -19,8 +20,9 @@ export class StartComponent implements OnInit {
   displayedColumns: string[] = ['createdAt', 'title', '_id'];
   processing: boolean = false;
   date = new Date();
-  constructor(private socketIO: Socket, private postService: PostService, public dialog: MatDialog) {
+  constructor(private emmiter: EmmiterService, private socketIO: Socket, private postService: PostService, public dialog: MatDialog) {
     this.posts = [{ createdAt: '', title: '' }]
+    this.emmiter.state.emit(false);
   }
 
   ngOnInit() {

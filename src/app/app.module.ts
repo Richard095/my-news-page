@@ -22,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FotterComponent } from './components/fotter/fotter.component';
 import { environment } from "../environments/environment";
 import { ContactComponent } from './components/contact/contact.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 const config: SocketIoConfig = { url: environment.URL, options: {} };
 
@@ -37,6 +38,7 @@ const config: SocketIoConfig = { url: environment.URL, options: {} };
     DetailpostComponent,
     FotterComponent,
     ContactComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/auth/user.service';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
+import { EmmiterService } from 'src/app/services/services/emmiter.service';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +16,13 @@ export class LoginComponent implements OnInit {
   hide: true;
   user: User
   isLoading: boolean = false;
-  constructor(private userService: UserService, private tokenService: TokenService, private router: Router) {
+  constructor(private emmiter: EmmiterService, private userService: UserService, private tokenService: TokenService, private router: Router) {
     this.user = { username: '', password: '' }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.emmiter.state.emit(false);
+  }
 
   isUsername: boolean;
 
