@@ -23,7 +23,7 @@ import { FotterComponent } from './components/fotter/fotter.component';
 import { environment } from "../environments/environment";
 import { ContactComponent } from './components/contact/contact.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
-
+import { EmmiterService } from "src/app/services/emmiter.service"
 const config: SocketIoConfig = { url: environment.URL, options: {} };
 
 @NgModule({
@@ -59,7 +59,8 @@ const config: SocketIoConfig = { url: environment.URL, options: {} };
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+    EmmiterService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
