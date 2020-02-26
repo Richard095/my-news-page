@@ -96,6 +96,5 @@ export class PostService {
   public getProfile(): Observable<User> {
     const uri = this.URI_API + "/user/profile";
     return this.httpClient.get(uri);
-  }
-
+  } 
 }

@@ -1,11 +1,10 @@
 {
   "name": "news",
   "version": "0.0.0",
-  "scripts": {
+  "sc|  1e o7+9-ipts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build",
-    "postinstall": "ng build --aot --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

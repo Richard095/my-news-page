@@ -7,10 +7,10 @@
 }
 .post-content {
   background: #ffffff;
+  padding: 15px;
 }
 .container {
   background: #ffffff;
-  //height: 100%;
 }
 .content-post {
   background: #f2f2f2;
@@ -46,4 +46,11 @@
   z-index: 99; /* Make sure it does not overlap */
   display: none;
   background: #3d5afe;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  .post-content {
+    padding: 0px;
+  }
 }
