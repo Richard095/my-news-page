@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmmiterService } from 'src/app/services/emmiter.service';
 
 @Component({
   selector: 'app-fotter',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fotter.component.scss']
 })
 export class FotterComponent implements OnInit {
-
-  constructor() { }
+  show: boolean = true;
+  constructor(private emmiter: EmmiterService) { }
 
   ngOnInit() {
+    this.emmiter.state.subscribe(state => {
+      this.show = state;
+    })
   }
 
 }
