@@ -31,15 +31,17 @@ export class StartComponent implements OnInit {
     this.getComments()
     this.socketIO.on("newcomment", (event) => { this.getComments() });
     this.socketIO.on("commentremoved", (event) => { this.getComments(); });
-
   }
 
   getPosts() {
+    this.processing = true;
     this.postService.getProfile().subscribe((res: User) => {
       this.posts = res.posts;
       this.dataSource = this.posts;
+      this.processing = false
       this.posts.reverse();
     }, (error) => {
+      this.processing = false;
       console.log(error);
     })
   }
