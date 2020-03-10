@@ -2,25 +2,93 @@
     <h2 class="dashboard-title">Dashboard</h2>
     <div class="row content ">
         <div class="col-lg-8">
-            <mat-progress-bar [style.visibility]="processing ? 'visible' : 'hidden'" class="" mode="indeterminate">
-            </mat-progress-bar>
+            <!-- <mat-progress-bar [style.visibility]="processing ? 'visible' : 'hidden'" class="" mode="indeterminate">
+            </mat-progress-bar> -->
             <mat-card class="example-card">
 
+                <div class="actions mb-3">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 d-flex justify-content-around">
+                            <div class="pt-2">
+                                <h5 style="font-family: 'Poppins' sans-serif;">Filtrar por fecha</h5>
+                            </div>
+                            <div>
+                                <mat-label>De </mat-label>
+                                <input style="border: none; padding: 3px;" [(ngModel)]="datePost.startDate"
+                                    placeholder="ejem. (2020-03-04)" matInput [min]="minDate" [max]="maxDate"
+                                    [matDatepicker]="picker">
+                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </div>
+                            <div>
+                                <mat-label>A </mat-label>
+                                <input style="border: none; padding: 3px;" [(ngModel)]="datePost.endDate"
+                                    placeholder="ejem. (2020-03-04)" matInput [min]="minDate" [max]="maxDate"
+                                    [matDatepicker]="picker2">
+                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </div>
+                            <button *ngIf="!processing" class="button-actions" (click)="search()" mat-mini-fab>
+                                <mat-icon>find_replace</mat-icon>
+                            </button>
 
-                <mat-card-header>
+                            <div id="wave" *ngIf="processing" class="pt-2">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h5 class="p-3" style="color: #444444;">{{_title || 'Loading...'}}</h5>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-around">
+                            <div>
+                                <button (click)="getPosts()" class="button-actions" mat-button
+                                    style="background: #f2f2f2; color: #3d5afe;">Noticias recientes</button>
+                            </div>
+                            <div>
+                                <button class="button-actions ml-auto" mat-button [routerLink]="['/admin/createpost']"
+                                    style="background: #3d5afe; color: #ffffff;">Añadir nueva noticia</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <mat-card-header>
                     <div mat-card-avatar class="example-header-image"></div>
                     <mat-card-title>Noticias agregadas recientemente</mat-card-title>
                     <mat-card-subtitle>{{date}}</mat-card-subtitle>
-                </mat-card-header>
+                    <div class="row" style="width: 50%;">
+                        <div class="col-lg-12 col-md-12  d-flex justify-content-between">
+                            <button class="button-actions" mat-button
+                                style="background: #f2f2f2; color: #3d5afe;">Noticias recientes</button>
+                            <button class="button-actions ml-auto" mat-button
+                                style="background: #3d5afe; color: #ffffff;">Añadir
+                                nueva
+                                noticia</button>
+                        </div>
+                    </div>
+                </mat-card-header> -->
+
+
+
 
                 <mat-card-content>
 
                     <!-- Table content list news last week -->
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z list">
+                    <table mat-table style="overflow-x: scroll;" [dataSource]="dataSource" class="mat-elevation-z list">
                         <!-- Checkbox Column -->
 
                         <div matColumnDef="createdAt">
-                            <th class="pr-2" mat-header-cell *matHeaderCellDef>Creado el</th>
+                            <th class="pr-2" mat-header-cell *matHeaderCellDef>Fecha de creación</th>
                             <td style="padding: 15px; color: #444444; " *matCellDef="let post">
                                 {{ post.createdAt | date: 'dd/MM/yyyy' }}
 
@@ -29,7 +97,7 @@
                         </div>
 
                         <ng-container matColumnDef="title">
-                            <th class="pl-2" mat-header-cell *matHeaderCellDef> Titulo </th>
+                            <th class="pl-2" mat-header-cell *matHeaderCellDef>Titulo de la noticia</th>
                             <td style="width: 75%; " *matCellDef="let post">
                                 {{post.title}} </td>
                             <hr>

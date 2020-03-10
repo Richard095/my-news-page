@@ -10,7 +10,7 @@ import { PipeAgoModule } from 'src/app/pipe.module';
 import { MomentModule } from 'ngx-moment';
 import { ProfileComponent } from './profile/profile.component';
 import { QuillModule } from "ngx-quill";
-
+import { DatePipe } from "@angular/common"
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -26,6 +26,7 @@ import { QuillModule } from "ngx-quill";
     PipeAgoModule,
     MomentModule,
     QuillModule.forRoot()
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class AdminModule { }

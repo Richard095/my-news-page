@@ -45,9 +45,8 @@ export class PostService {
       );
   }
 
-
-  getPost(id:string):Observable<Post>{
-    return this.httpClient.get(this.URI_API+'/post/'+id);
+  getPost(id: string): Observable<Post> {
+    return this.httpClient.get(this.URI_API + '/post/' + id);
   }
 
   public addPost(formData: FormData): Observable<Post> {
@@ -96,5 +95,5 @@ export class PostService {
   public getProfile(): Observable<User> {
     const uri = this.URI_API + "/user/profile";
     return this.httpClient.get(uri);
-  } 
+  }
 }

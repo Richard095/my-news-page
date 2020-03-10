@@ -7,6 +7,10 @@ import { ModalComponent } from '../../modals/modal/modal.component';
 import { Socket } from 'ngx-socket-io';
 import { DetailpostComponent } from '../../modals/detailpost/detailpost.component';
 import { EmmiterService } from 'src/app/services/emmiter.service';
+import { datePost } from 'src/app/models/Date';
+import { DatePipe } from "@angular/common"
+import { UserService } from 'src/app/services/auth/user.service';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-postlist',
   templateUrl: './start.component.html',
@@ -20,8 +24,11 @@ export class StartComponent implements OnInit {
   displayedColumns: string[] = ['createdAt', 'title', '_id'];
   processing: boolean = false;
   date = new Date();
-  constructor(private emmiter: EmmiterService, private socketIO: Socket, private postService: PostService, public dialog: MatDialog) {
+  datePost: datePost;
+  _title: string;
+  constructor(private userService: UserService, private datePipe: DatePipe, private emmiter: EmmiterService, private socketIO: Socket, private postService: PostService, public dialog: MatDialog) {
     this.posts = [{ createdAt: '', title: '' }]
+    this.datePost = { startDate: '', endDate: '' };
     this.emmiter.state.emit(false);
   }
 
@@ -33,17 +40,42 @@ export class StartComponent implements OnInit {
     this.socketIO.on("commentremoved", (event) => { this.getComments(); });
   }
 
+  //Getting posts
   getPosts() {
     this.processing = true;
     this.postService.getProfile().subscribe((res: User) => {
       this.posts = res.posts;
+      //console.log(this.posts);
       this.dataSource = this.posts;
+      this._title = "Noticias Ult. Dos semanas";
       this.processing = false
       this.posts.reverse();
     }, (error) => {
       this.processing = false;
       console.log(error);
     })
+  }
+
+  search() {
+    if ((this.datePost.endDate && this.datePost.endDate) !== '') {
+      this.datePost.startDate = this.datePipe.transform(new Date(this.datePost.startDate), "yyyy-MM-dd");
+      this.datePost.endDate = this.datePipe.transform(new Date(this.datePost.endDate), "yyyy-MM-dd");
+      this.processing = true;
+      this.userService.getUserPostsByDate(this.datePost.startDate, this.datePost.endDate)
+        .subscribe((res: any) => {
+          //console.log(res);
+          this.posts = res.posts;
+          this.dataSource = this.posts;
+          this.processing = false;
+          this._title = "Noticias del " + this.datePost.startDate + " al " + this.datePost.endDate;
+          this.posts.reverse();
+          this.datePost = { startDate: '', endDate: '' };
+        }, error => console.log(error))
+
+    } else {
+      this.getPosts();
+    }
+
   }
 
   delete(_id) {
@@ -62,6 +94,7 @@ export class StartComponent implements OnInit {
     });
   }
 
+  //Getting comments
   getComments() {
     this.postService.getComments().subscribe((res: any) => {
       this.comments = res;
